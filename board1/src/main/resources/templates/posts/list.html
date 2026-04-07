@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${pageTitle})}"></head>
+<body>
+<div class="wrap">
+	<header th:replace="~{fragments/header :: siteHeader}"></header>
+
+	<div class="flash" th:if="${message}" th:text="${message}"></div>
+
+	<div class="card">
+		<table class="list" th:if="${page.hasContent()}">
+			<thead>
+			<tr>
+				<th style="width:4rem">번호</th>
+				<th>제목</th>
+				<th style="width:8rem">작성자</th>
+				<th style="width:11rem">작성일</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="p : ${page.content}">
+				<td th:text="${p.id}">1</td>
+				<td>
+					<a th:href="@{/posts/{id}(id=${p.id})}" th:text="${p.title}">제목</a>
+				</td>
+				<td th:text="${p.author}">작성자</td>
+				<td class="meta" th:text="${#temporals.format(p.createdAt, 'yyyy-MM-dd HH:mm')}">날짜</td>
+			</tr>
+			</tbody>
+		</table>
+		<p class="empty" th:unless="${page.hasContent()}">등록된 글이 없습니다.</p>
+
+		<nav class="pager" th:if="${page.totalPages > 1}">
+			<a class="btn btn-ghost" th:if="${page.hasPrevious()}"
+			   th:href="@{/posts(page=${page.number - 1}, size=${page.size})}">이전</a>
+			<span th:text="${page.number + 1} + ' / ' + ${page.totalPages}">1 / 1</span>
+			<a class="btn btn-ghost" th:if="${page.hasNext()}"
+			   th:href="@{/posts(page=${page.number + 1}, size=${page.size})}">다음</a>
+		</nav>
+	</div>
+</div>
+</body>
+</html>

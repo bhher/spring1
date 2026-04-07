@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${pageTitle})}"></head>
+<body>
+<div class="wrap">
+	<header th:replace="~{fragments/header :: siteHeader}"></header>
+
+	<article class="card">
+		<h2 style="margin-top:0" th:text="${post.title}">제목</h2>
+		<p class="meta">
+			<span th:text="${post.author}">작성자</span>
+			·
+			<span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">작성</span>
+			<span th:if="${post.updatedAt != null && post.updatedAt != post.createdAt}">
+				· 수정 <span th:text="${#temporals.format(post.updatedAt, 'yyyy-MM-dd HH:mm')}"></span>
+			</span>
+		</p>
+		<div class="post-body" th:text="${post.content}">내용</div>
+
+		<div class="actions">
+			<a class="btn btn-ghost" th:href="@{/posts}">목록</a>
+			<a class="btn btn-primary" th:href="@{/posts/{id}/edit(id=${post.id})}">수정</a>
+			<form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post" style="display:inline"
+				  onsubmit="return confirm('삭제할까요?');">
+				<button type="submit" class="btn btn-danger">삭제</button>
+			</form>
+		</div>
+	</article>
+</div>
+</body>
+</html>

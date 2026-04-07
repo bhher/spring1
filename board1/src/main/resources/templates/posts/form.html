@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${pageTitle})}"></head>
+<body>
+<div class="wrap">
+	<header th:replace="~{fragments/header :: siteHeader}"></header>
+
+	<div class="card">
+		<form th:action="${post.id != null} ? @{/posts/{id}(id=${post.id})} : @{/posts}"
+			  th:object="${post}" method="post">
+			<input type="hidden" th:if="${post.id != null}" th:field="*{id}"/>
+
+			<div class="field">
+				<label for="title">제목</label>
+				<input id="title" type="text" th:field="*{title}" maxlength="200" placeholder="제목을 입력하세요"/>
+				<p class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+			</div>
+
+			<div class="field">
+				<label for="author">작성자</label>
+				<input id="author" type="text" th:field="*{author}" maxlength="50" placeholder="작성자"/>
+				<p class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></p>
+			</div>
+
+			<div class="field">
+				<label for="content">내용</label>
+				<textarea id="content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
+				<p class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
+			</div>
+
+			<div class="actions">
+				<a class="btn btn-ghost" th:href="${post.id != null} ? @{/posts/{id}(id=${post.id})} : @{/posts}">취소</a>
+				<button type="submit" class="btn btn-primary" th:text="${post.id != null} ? '저장' : '등록'">등록</button>
+			</div>
+		</form>
+	</div>
+</div>
+</body>
+</html>

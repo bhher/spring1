@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--타임리프 문법을 사용하게 해주는 선언부-->
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <h1>글 작성</h1>
+  <form th:action="@{|/board/edit/${board.id}}" method="post" th:object="${board}">
+    제목 : <input type="text" th:field="*{title}"> <br/>
+    내용 : <textarea th:field="*{content}" rows="5"></textarea><br/>
+    <button type="submit">수정완료</button>
+  </form>
+  <a th:href="@{/board}">목록으로</a>
+</body>
+</html>

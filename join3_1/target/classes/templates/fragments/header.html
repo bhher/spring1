@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="header" class="app-header">
+    <a class="brand" th:href="@{/}">join3_1</a>
+    <nav>
+        <th:block th:if="${session.loginUser != null}">
+            <span th:text="${session.loginName}">이름</span>
+            <a th:href="@{/home}">마이홈</a>
+            <a th:href="@{/logout}">로그아웃</a>
+        </th:block>
+        <th:block th:unless="${session.loginUser != null}">
+            <a th:href="@{/login}">로그인</a>
+            <a th:href="@{/register}">회원가입</a>
+        </th:block>
+    </nav>
+</header>
+</body>
+</html>

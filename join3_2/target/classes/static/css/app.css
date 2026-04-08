@@ -1,0 +1,156 @@
+:root {
+    --bg: #f4f6f8;
+    --card: #fff;
+    --text: #1a1a1a;
+    --muted: #5c6570;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --danger: #b91c1c;
+    --ok: #047857;
+    --radius: 10px;
+    --shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.app-header {
+    background: var(--card);
+    box-shadow: var(--shadow);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.app-header .brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.app-header .brand:hover {
+    color: var(--accent);
+}
+
+.app-header nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.app-header nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.app-header nav a:hover {
+    text-decoration: underline;
+}
+
+.wrap {
+    max-width: 440px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.wrap.wide {
+    max-width: 560px;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+}
+
+h1.page-title {
+    font-size: 1.4rem;
+    margin: 0 0 1rem;
+    font-weight: 700;
+}
+
+label {
+    display: block;
+    margin-top: 0.85rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.55rem 0.65rem;
+    margin-top: 0.3rem;
+    border: 1px solid #cfd6dd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.35);
+    border-color: var(--accent);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1.1rem;
+    padding: 0.55rem 1.15rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background: var(--accent-hover);
+}
+
+.msg {
+    color: var(--ok);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.err {
+    color: var(--danger);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.field-err {
+    color: #9a3412;
+    font-size: 0.82rem;
+    margin-top: 0.25rem;
+}
+
+.hint {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.app-footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+}

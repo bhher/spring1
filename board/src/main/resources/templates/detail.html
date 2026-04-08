@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>글상세</h1>
+    <h2 th:text="${board.title}"></h2>
+    <p>작성자 : <span th:text="${board.writer}"></span></p>
+    <p th:text="${board.content}"></p>
+    <a href="/board">목록으로</a>
+</body>
+</html>

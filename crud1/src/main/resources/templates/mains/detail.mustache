@@ -1,0 +1,23 @@
+{{>layouts/header}}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Num</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#detail}}
+        <tr>
+            <th>{{num}}</th>
+            <th>{{title}}</th>
+            <th>{{content}}</th>
+        </tr>
+    {{/detail}}
+    </tbody>
+</table>
+<a href="/list/{{detail.num}}/edit" class="btn btn-primary">Edit</a>
+<a href="/list/{{detail.num}}/delete" class="btn btn-danger">Delete</a>
+<a href="/list">Go to Article List</a>
+{{>layouts/footer}}

@@ -1,0 +1,21 @@
+{{>layouts/header}}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Num</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#DoList}}
+        <tr>
+            <th>{{num}}</th>
+            <th>{{title}}</th>
+            <th>{{content}}</th>
+        </tr>
+    {{/DoList}}
+    </tbody>
+</table>
+<a href="/mains/add">New</a>
+{{>layouts/footer}}

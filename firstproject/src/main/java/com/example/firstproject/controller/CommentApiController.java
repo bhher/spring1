@@ -15,7 +15,7 @@ public class CommentApiController {
     private CommentService commentService;
 
     @GetMapping("/api/articles/{articleId}/comments")
-    public ResponseEntity<List<CommentDto>> comments (@PathVariable Long articleId){
+    public ResponseEntity<List<CommentDto>> comments(@PathVariable("articleId") Long articleId) {
         // List<Comment> -> List<CommentDto> Comment(엔티티)를 DTO로 만들어서 반환,
         // 응답도 같이 보내주기 위해 ResponseEntity로 감싸기
 
@@ -28,7 +28,7 @@ public class CommentApiController {
     }
 
     @PostMapping("/api/articles/{articleId}/comments")
-    public ResponseEntity<CommentDto> create(@PathVariable Long articleId, @RequestBody CommentDto dto){
+    public ResponseEntity<CommentDto> create(@PathVariable("articleId") Long articleId, @RequestBody CommentDto dto) {
         // 서비스에게 위임
         CommentDto createdDto = commentService.create(articleId,dto);
 
@@ -36,7 +36,7 @@ public class CommentApiController {
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
     @PatchMapping("/api/comments/{id}")
-    public ResponseEntity<CommentDto> update(@PathVariable Long id,
+    public ResponseEntity<CommentDto> update(@PathVariable("id") Long id,
                                              @RequestBody CommentDto dto) {
         // 서비스에게 위임
         CommentDto updatedDto = commentService.update(id,dto);
@@ -46,7 +46,7 @@ public class CommentApiController {
     }
 
     @DeleteMapping("/api/comments/{id}")
-    public ResponseEntity<CommentDto> delete(@PathVariable Long id) {
+    public ResponseEntity<CommentDto> delete(@PathVariable("id") Long id) {
         // 서비스에게 위임
         CommentDto deletedDto = commentService.delete(id);
 

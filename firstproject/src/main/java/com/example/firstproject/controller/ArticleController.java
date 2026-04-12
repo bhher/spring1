@@ -44,7 +44,7 @@ public class ArticleController {
         return "redirect:/articles/"+saved.getId();
     }
     @GetMapping("/articles/{id}")
-    public String show(@PathVariable Long id, Model model){
+    public String show(@PathVariable("id") Long id, Model model){
         log.info("id="+id);
         //id로 데이터 가져오기
         Article article = articleRepository.findById(id).orElse(null);
@@ -71,8 +71,8 @@ public class ArticleController {
 
     }
 
-    @GetMapping("articles/{id}/edit")
-    public String edit(@PathVariable Long id, Model model){
+    @GetMapping("/articles/{id}/edit")
+    public String edit(@PathVariable("id") Long id, Model model){
         Article article = articleRepository.findById(id).orElse(null);
         model.addAttribute("article",article);
         return "articles/edit";
@@ -95,7 +95,7 @@ public class ArticleController {
     }
 
     @GetMapping("/articles/{id}/delete")
-    public String delete(@PathVariable Long id, RedirectAttributes rttr) {
+    public String delete(@PathVariable("id") Long id, RedirectAttributes rttr) {
         log.info("삭제 요청");
 
         // 1: 삭제 대상을 가져온다.

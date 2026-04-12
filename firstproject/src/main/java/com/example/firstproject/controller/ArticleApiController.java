@@ -26,7 +26,7 @@ public class ArticleApiController {
         return articleService.index();
     }
     @GetMapping("/api/articles/{id}")
-    public Article show(@PathVariable Long id){
+    public Article show(@PathVariable("id") Long id){
         return articleService.show(id);
     }
 
@@ -38,7 +38,7 @@ public class ArticleApiController {
     }
 
     @PatchMapping("/api/articles/{id}")
-    public ResponseEntity<Article> update(@PathVariable Long id,
+    public ResponseEntity<Article> update(@PathVariable("id") Long id,
                                           @RequestBody ArticleForm dto) {
 
         Article updated = articleService.update(id, dto);
@@ -48,7 +48,7 @@ public class ArticleApiController {
     }
 
     @DeleteMapping("/api/articles/{id}")
-    public ResponseEntity<Article> delete(@PathVariable Long id) {
+    public ResponseEntity<Article> delete(@PathVariable("id") Long id) {
 
         Article deleted = articleService.delete(id);
         return (deleted != null) ?

@@ -1,11 +1,16 @@
 package com.example.firstproject.dto;
 
 import com.example.firstproject.entity.Article;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class ArticleForm {
     private Long id;

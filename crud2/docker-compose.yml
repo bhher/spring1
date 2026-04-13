@@ -1,0 +1,14 @@
+services:
+  crud2:
+    build: .
+    image: crud2:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      # H2 파일 DB(/data/crud2-db.*) 를 호스트와 공유해 컨테이너를 지워도 데이터 유지 (선택)
+      - crud2-h2-data:/data
+
+volumes:
+  crud2-h2-data:

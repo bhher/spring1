@@ -1,0 +1,13 @@
+# 테스트 시에는 인메모리 H2 사용 (MySQL 없이 컨텍스트 로드)
+spring:
+  datasource:
+    url: jdbc:h2:mem:imgboardtest;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+app:
+  upload-dir: ${java.io.tmpdir}/img-board-test-uploads/

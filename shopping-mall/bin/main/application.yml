@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: shopping-mall
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/shopping_mall?createDatabaseIfNotExist=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: root
+    password: "1234"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 30MB
+
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8080
+
+# 로컬 파일 저장 (추후 S3 등으로 교체 가능하도록 프로퍼티로 분리)
+app:
+  upload-dir: ${user.home}/shopping-mall-uploads/

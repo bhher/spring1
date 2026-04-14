@@ -1,17 +1,24 @@
 {{>layouts/header}}
-{{#editData}}
-    <form action="/mains/update" method="post" class="container">
+<main class="container py-4">
+    <h1 class="h3 mb-4">글 수정</h1>
+    {{#editData}}
+    <form action="/mains/update" method="post" class="needs-validation">
         <input type="hidden" name="num" value="{{num}}">
         <div class="mb-3">
             <label class="form-label">제목</label>
-            <input type="text" class="form-control" name="title" value="{{title}}">
+            <input type="text" class="form-control" name="title" value="{{title}}" required>
         </div>
         <div class="mb-3">
             <label class="form-label">내용</label>
-            <textarea class="form-control" rows="3" name="content">{{content}}</textarea>
+            <textarea class="form-control" rows="5" name="content" required>{{content}}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">submit</button>
-        <a href="/list">Back</a>
+        <button type="submit" class="btn btn-primary">저장</button>
+        <a href="/list/{{num}}" class="btn btn-outline-secondary">취소</a>
     </form>
-{{/editData}}
+    {{/editData}}
+    {{^editData}}
+    <p class="text-muted">수정할 글을 찾을 수 없습니다.</p>
+    <a href="/list" class="btn btn-outline-secondary">목록으로</a>
+    {{/editData}}
+</main>
 {{>layouts/footer}}

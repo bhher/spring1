@@ -1,23 +1,34 @@
 {{>layouts/header}}
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Num</th>
-        <th scope="col">Title</th>
-        <th scope="col">Content</th>
-    </tr>
-    </thead>
-    <tbody>
+<main class="container py-4">
+    <h1 class="h3 mb-4">글 상세</h1>
     {{#detail}}
-        <tr>
-            <th>{{num}}</th>
-            <th>{{title}}</th>
-            <th>{{content}}</th>
-        </tr>
+    <div class="table-responsive mb-4">
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th class="table-light" style="width:8rem">번호</th>
+                <td>{{num}}</td>
+            </tr>
+            <tr>
+                <th class="table-light">제목</th>
+                <td>{{title}}</td>
+            </tr>
+            <tr>
+                <th class="table-light">내용</th>
+                <td style="white-space: pre-wrap; word-break: break-word;">{{content}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+        <a href="/list/{{num}}/edit" class="btn btn-primary">수정</a>
+        <a href="/list/{{num}}/delete" class="btn btn-outline-danger" onclick="return confirm('삭제할까요?');">삭제</a>
+        <a href="/list" class="btn btn-outline-secondary">목록</a>
+    </div>
     {{/detail}}
-    </tbody>
-</table>
-<a href="/list/{{detail.num}}/edit" class="btn btn-primary">Edit</a>
-<a href="/list/{{detail.num}}/delete" class="btn btn-danger">Delete</a>
-<a href="/list">Go to Article List</a>
+    {{^detail}}
+    <p class="text-muted">존재하지 않는 글입니다.</p>
+    <a href="/list" class="btn btn-outline-secondary">목록으로</a>
+    {{/detail}}
+</main>
 {{>layouts/footer}}

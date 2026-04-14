@@ -1,0 +1,144 @@
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: #0369a1;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.layout {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.nav {
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.muted {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.err {
+  color: #b91c1c;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.narrow {
+  max-width: 420px;
+}
+
+label {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: 600;
+}
+
+input[type='text'],
+input[type='password'],
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.45rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.linkish {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #0369a1;
+  text-decoration: underline;
+  font: inherit;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 1.35rem;
+}
+
+.meta {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+pre.body {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  margin: 1rem 0;
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.tbl th,
+.tbl td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.tbl th {
+  background: #f1f5f9;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery figure {
+  margin: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.gallery figcaption {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.35rem;
+}
+
+.actions {
+  margin-top: 1rem;
+}

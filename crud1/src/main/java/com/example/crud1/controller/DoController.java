@@ -19,28 +19,32 @@ public class DoController {
     private DoRepository doRepository;
 
     @GetMapping("/mains/add")
-    public String addForm(){
+    public String addForm(Model model) {
+        model.addAttribute("pageTitle", "새 글");
         return "mains/add";
     }
 
     @GetMapping("/list/{num}")
-    public String detail(@PathVariable Long num, Model model){
+    public String detail(@PathVariable Long num, Model model) {
         DoIt doIt = doRepository.findById(num).orElse(null);
-        model.addAttribute("detail",doIt);
+        model.addAttribute("detail", doIt);
+        model.addAttribute("pageTitle", "상세");
         return "mains/detail";
     }
 
     @GetMapping("/list")
-    public String list(Model model){
+    public String list(Model model) {
         List<DoIt> doList = doRepository.findAll();
-        model.addAttribute("DoList",doList);
+        model.addAttribute("DoList", doList);
+        model.addAttribute("pageTitle", "목록");
         return "mains/doList";
     }
 
     @GetMapping("/list/{num}/edit")
-    public String updateForm(@PathVariable Long num, Model model){
+    public String updateForm(@PathVariable Long num, Model model) {
         DoIt toDo = doRepository.findById(num).orElse(null);
-        model.addAttribute("editData",toDo);
+        model.addAttribute("editData", toDo);
+        model.addAttribute("pageTitle", "수정");
         return "mains/edit";
     }
 

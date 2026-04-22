@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>환영합니다</title>
+</head>
+<body>
+<th:block th:if="${member == null or member.userId == null}">
+	<p>표시할 가입 정보가 없습니다. 먼저 회원가입을 진행해 주세요.</p>
+	<p><a th:href="@{/register}">회원가입</a></p>
+</th:block>
+<th:block th:unless="${member == null or member.userId == null}">
+	<h2>회원가입 성공!</h2>
+	<p th:text="|${member.name}님, 가입을 진심으로 축하드립니다.|"></p>
+	<ul>
+		<li>아이디: <span th:text="${member.userId}"></span></li>
+		<li>이메일: <span th:text="${member.email}"></span></li>
+	</ul>
+	<p><a th:href="@{/register}">다시 가입하기</a></p>
+</th:block>
+</body>
+</html>

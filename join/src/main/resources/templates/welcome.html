@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>환영합니다</title>
+</head>
+<body>
+<h2>회원가입 성공!</h2>
+<p th:text="${user.name} + '님, 가입을 진심으로 축하드립니다.'"></p>
+<ul>
+	<li>아이디: <span th:text="${user.userId}"></span></li>
+	<li>이메일: <span th:text="${user.email}"></span></li>
+</ul>
+<a th:href="@{/register}">다시 가입하기</a>
+</body>
+</html>

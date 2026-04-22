@@ -125,6 +125,8 @@ docker build -t crud2:latest .
 
 ## 4. 3단계: AWS에 MySQL(RDS) 만들기
 
+
+
 ### 4-1. 흐름
 
 1. **VPC** 안에 **서브넷**(최소 2 AZ 권장) 준비  

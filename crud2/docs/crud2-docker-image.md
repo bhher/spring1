@@ -56,6 +56,15 @@ docker build -t crud2:latest .
 docker run -e JAVA_OPTS="-Xms128m -Xmx256m" -p 8080:8080 crud2:latest
 ```
 
+이미지 다시빌드
+```bash
+cd d:\spring1\crud2
+docker build -t crud2:latest .
+docker rm -f crud2-app 2>nul
+docker run -e JAVA_OPTS="-Xms128m -Xmx256m" -p 8080:8080 --name crud2-app crud2:latest
+```
+
+
 ---
 
 ## 실행 방법
@@ -115,6 +124,7 @@ EC2에서 80번으로 노출하는 등의 흐름은 `docs/spring-boot-docker-aws
 
 | 증상 | 원인·조치 |
 |------|-----------|
+| H2 Console: `remote connections ('webAllowOthers') are disabled` | 호스트 브라우저 → 컨테이너는 H2 입장에서 **원격**이다. `spring.h2.console.settings.web-allow-others=true` 사용(`application-docker.properties`에 있음). 설정을 바꾼 뒤에는 **이미지를 다시 빌드**해야 JAR에 반영된다. |
 | `Cannot load driver class: org.h2.Driver` (또는 MySQL) | `build.gradle`에 해당 **runtime** 의존성이 있는지 확인 후 이미지 **재빌드** (`docker build --no-cache`). |
 | `plain` JAR만 실행됨 | 이 프로젝트 Dockerfile은 `grep -v plain`으로 실행용 JAR만 고른다. 커스텀 Dockerfile을 쓸 때는 동일하게 처리할 것. |
 | 포트 충돌 | 이미 8080을 쓰는 프로세스가 있으면 `-p 8081:8080` 등으로 바꾼다. |

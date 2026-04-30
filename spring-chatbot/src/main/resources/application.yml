@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: spring-chatbot
+
+openai:
+  api-key: ${OPENAI_API_KEY:}
+  base-url: https://api.openai.com/v1
+  # 2026 기준: 신규는 responses 권장, 예제는 chat/completions로 구성
+  chat-completions-path: /chat/completions
+  model: gpt-4o-mini
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+

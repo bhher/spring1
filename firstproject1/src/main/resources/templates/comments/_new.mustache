@@ -1,0 +1,54 @@
+<div class="card m-2" id="comments-new">
+    <div class="card-body">
+        <form action="">
+            <div class="mb-3">
+                <div class="form-label">닉네임</div>
+                <input type="text" class="form-control form-control-sm" id="new-comment-nickname" />
+            </div>
+<!--            댓글 본문-->
+            <div class="mb-3">
+                <div class="form-label">내용</div>
+                <textarea id="new-comment-body" class="form-control form-control-sm" rows="3"></textarea>
+            </div>
+<!--            히든인풋-->
+            {{#article}}
+                <input type="hidden" id="new-comment-article-id" value="{{id}}">
+            {{/article}}
+<!--            전송-->
+            <button type="button" class="btn btn-outline-primary btn-sm" id="comment-create-btn">댓글작성</button>
+        </form>
+    </div>
+</div>
+<script>
+    {
+    //댓글 생성버튼
+    const commentCreateBtn = document.querySelector("#comment-create-btn");
+    //댓글 클릭 이벤트 감지
+    commentCreateBtn.addEventListener("click",function(){
+        console.log("클릭감지");
+        //댓글 객체로 생성
+        const comment = {
+            nickname : document.querySelector("#new-comment-nickname").value,
+            body : document.querySelector("#new-comment-body").value,
+            article_id : document.querySelector("#new-comment-article-id").value
+        }
+        console.log(comment);
+
+        //fetch() 비동기 통신 API
+        const url = "/api/articles/"+comment.article_id+"/comments";
+        fetch(url,{
+            method:"POST",
+            body:JSON.stringify(comment),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(response => {
+           //정상 전송시
+           const msg=(response.ok) ? "댓글 등록 성공" : "실패";
+           alert(msg);
+           //새로고침
+           window.location.reload();
+        });
+    });
+    }
+</script>

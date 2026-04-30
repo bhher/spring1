@@ -69,4 +69,41 @@ class ArticleServiceTest {
         assertEquals(expected.getTitle(), article.getTitle());
         assertEquals(expected.getContent(), article.getContent());
     }
+
+    @Test
+    @Transactional
+    void update() {
+        // 준비
+        Long id = 1L;
+        String newTitle = "가가가가(수정)";
+        String newContent = "1111(수정)";
+        ArticleForm dto = new ArticleForm(id, newTitle, newContent);
+
+        // 수행
+        Article updated = articleService.update(id, dto);
+
+        // 검증
+        assertNotNull(updated);
+        assertEquals(id, updated.getId());
+        assertEquals(newTitle, updated.getTitle());
+        assertEquals(newContent, updated.getContent());
+    }
+
+    @Test
+    @Transactional
+    void delete() {
+        // 준비
+        Long id = 2L;
+
+        // 수행
+        Article deleted = articleService.delete(id);
+
+        // 검증: 삭제된 엔티티 반환
+        assertNotNull(deleted);
+        assertEquals(id, deleted.getId());
+
+        // 검증: 실제로 조회가 안 됨
+        Article after = articleService.show(id);
+        assertNull(after);
+    }
 }

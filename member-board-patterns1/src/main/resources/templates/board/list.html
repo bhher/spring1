@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+	<meta charset="UTF-8"/>
+	<title>게시판</title>
+	<style>
+		body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; }
+		table { width: 100%; border-collapse: collapse; }
+		th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+		nav { margin-bottom: 1rem; }
+		.flash { color: #060; }
+	</style>
+</head>
+<body>
+<nav>
+	<a th:href="@{/boards}">목록</a>
+	<th:block th:if="${session.loginUserId != null}">
+		· <a th:href="@{/boards/new}">글쓰기</a>
+		· <a th:href="@{/me}">내 정보</a>
+		<form style="display:inline" th:action="@{/logout}" method="post">
+			<button type="submit">로그아웃</button>
+		</form>
+	</th:block>
+	<th:block th:if="${session.loginUserId == null}">
+		· <a th:href="@{/login}">로그인</a>
+		· <a th:href="@{/signup}">회원가입</a>
+	</th:block>
+</nav>
+<p class="flash" th:if="${message}" th:text="${message}"></p>
+<h1>게시글 목록</h1>
+<table>
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>제목</th>
+		<th>작성자</th>
+		<th>작성일</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="b : ${boards}">
+		<td th:text="${b.id}">1</td>
+		<td><a th:href="@{/boards/{id}(id=${b.id})}" th:text="${b.title}">제목</a></td>
+		<td th:text="${b.authorNickname}">작성자</td>
+		<td th:text="${#temporals.format(b.createdAt, 'yyyy-MM-dd HH:mm')}">날짜</td>
+	</tr>
+	<tr th:if="${#lists.isEmpty(boards)}">
+		<td colspan="4">등록된 글이 없습니다.</td>
+	</tr>
+	</tbody>
+</table>
+</body>
+</html>

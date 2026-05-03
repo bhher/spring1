@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+	<meta charset="UTF-8"/>
+	<title>오류</title>
+	<style>
+		body { font-family: sans-serif; max-width: 560px; margin: 2rem auto; }
+		.error { color: #c00; }
+	</style>
+</head>
+<body>
+<h1>오류</h1>
+<p class="error" th:text="${error}">메시지</p>
+<p><a th:href="@{/boards}">목록으로</a></p>
+</body>
+</html>

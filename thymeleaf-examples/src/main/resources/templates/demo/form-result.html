@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{layouts/fragments :: head}"></head>
+<body class="bg-light">
+<nav th:replace="~{layouts/fragments :: nav}"></nav>
+<main class="container py-4">
+	<h1 class="h4 mb-3" th:text="${pageTitle}">제목</h1>
+	<dl class="row card card-body shadow-sm">
+		<dt class="col-sm-3">이름</dt>
+		<dd class="col-sm-9" th:text="${demoForm.username}">-</dd>
+		<dt class="col-sm-3">메모</dt>
+		<dd class="col-sm-9" th:text="${demoForm.memo}">-</dd>
+		<dt class="col-sm-3">동의</dt>
+		<dd class="col-sm-9" th:text="${demoForm.agree} ? '예' : '아니오'">-</dd>
+		<dt class="col-sm-3">제출 시각</dt>
+		<dd class="col-sm-9" th:text="${#temporals.format(submittedAt, 'yyyy-MM-dd HH:mm:ss')}">-</dd>
+	</dl>
+	<p><a th:href="@{/demo/form}">폼으로 돌아가기</a> · <a th:href="@{/}">홈</a></p>
+</main>
+<footer th:replace="~{layouts/fragments :: footer}"></footer>
+</body>
+</html>

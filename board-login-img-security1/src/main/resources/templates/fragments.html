@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:fragment="head(pageTitle)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageTitle} + ' · JWT게시판'">JWT게시판</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        window.BOARD1_CTX = /*[[@{/}]]*/ '';
+        /*]]>*/
+    </script>
+    <script defer th:src="@{/js/board-api.js}"></script>
+</head>
+<body>
+<nav th:fragment="navbar" class="app-nav">
+    <strong><a th:href="@{/ui/posts}" style="text-decoration:none;color:inherit;">JWT 게시판</a></strong>
+    <a th:href="@{/ui/posts}">목록</a>
+    <span id="nav-auth"></span>
+</nav>
+</body>
+</html>

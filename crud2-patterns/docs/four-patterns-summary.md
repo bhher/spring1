@@ -1,0 +1,70 @@
+# crud2-patterns — 네 가지 패턴 정리
+
+원본 **`crud2`**와 동일한 CRUD·화면을 유지하고, **`DoIt` 엔티티를 DTO로부터 만드는 방식**만 나눈 모듈입니다.  
+`DoDto.toEntity()`는 사용하지 않으며, 변환은 **서비스** 또는 **`DoMapper`**에만 둡니다.
+
+| 모듈 | 포트 | H2 (로컬 예시) |
+|------|------|-----------------|
+| `crud2-pattern-setter` | 9201 | `~/test_crud2_setter` |
+| `crud2-pattern-constructor` | 9202 | `~/test_crud2_constructor` |
+| `crud2-pattern-builder` | 9203 | `~/test_crud2_builder` |
+| `crud2-pattern-mapper` | 9204 | `~/test_crud2_mapper` |
+
+---
+
+## 1. Setter 패턴
+
+- **등록:** `new DoIt()` 후 `setTitle`, `setContent` 등으로 채움.
+- **수정:** DB에서 조회한 **영속 엔티티**에 setter로 값 반영.
+
+**요약:** JPA에서 흔한 “로드 → 필드 변경 → 저장/flush” 스타일.
+
+---
+
+## 2. Constructor 패턴
+
+- **등록:** `new DoIt(null, title, content)`처럼 **생성자 한 번**으로 조립.
+- **수정:** `new DoIt(id, title, content)`로 만든 뒤 `save`로 반영 (`crud2` 원본과 같은 계열).
+
+**요약:** 필드가 생성자 인자로 고정되어, “한 번에 값이 들어간 객체”가 분명함.
+
+---
+
+## 3. Builder 패턴
+
+- 엔티티에 Lombok **`@Builder`**.
+- **서비스**에서 `DoIt.builder().title(...).content(...).build()` 만 사용.
+- **별도 Mapper 클래스 없음** — 조립은 전부 `DoService` 안.
+
+**요약:** 필드가 많을 때 체인이 읽기 쉽고, 선택 필드·기본값을 다루기 좋음.
+
+---
+
+## 4. Mapper 패턴
+
+- **`support/DoMapper`**에 `toNewEntity(dto)`, `toEntityWithId(dto)` 등 **static 변환**만 모음.
+- **서비스**는 `save(DoMapper.toNewEntity(dto))`처럼 흐름만 담당. `new DoIt(...)` 문자열은 서비스에 없음.
+
+**요약:** “DTO → 엔티티 규칙”을 한 파일에 모아 변경 지점이 명확함.
+
+---
+
+## 한눈에 비교
+
+| 패턴 | 변환(조립)이 있는 곳 | 조립 방식 |
+|------|----------------------|-----------|
+| Setter | `DoService` | 빈 객체 + setter |
+| Constructor | `DoService` | 생성자 호출 |
+| Builder | `DoService` | Lombok 빌더 |
+| Mapper | `DoMapper` | static 메서드(내부는 보통 생성자 등) |
+
+---
+
+## 관련 문서
+
+- Mapper와 나머지 패턴 비교: `MAPPER-다른패턴과-차이.md` / `MAPPER-vs-other-patterns.md`
+- 원본·생성자 비교 등: `COMPARE-*.md` (같은 `docs/` 폴더)
+
+**파일 위치:** `D:\spring1\crud2-patterns\docs\four-patterns-summary.md`
+
+한글 파일명: `네가지-패턴-정리.md` (동일 내용)

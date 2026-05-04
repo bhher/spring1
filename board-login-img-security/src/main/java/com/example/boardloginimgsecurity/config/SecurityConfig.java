@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,8 +26,7 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider(
             LoginUserDetailsService loginUserDetailsService,
             PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(loginUserDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(loginUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
@@ -38,7 +37,7 @@ public class SecurityConfig {
         http.authenticationProvider(authenticationProvider);
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/login", "/register", "/uploads/**", "/error").permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/logout", "GET")).permitAll()
+                .requestMatchers(HttpMethod.GET, "/logout").permitAll()
                 .requestMatchers(HttpMethod.POST, "/register").permitAll()
                 .requestMatchers("/posts/write").authenticated()
                 .requestMatchers("/posts/*/edit").authenticated()
@@ -53,7 +52,7 @@ public class SecurityConfig {
                 .failureUrl("/login?error")
                 .permitAll());
         http.logout(logout -> logout
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .logoutRequestMatcher(PathPatternRequestMatcher.pathPattern(HttpMethod.GET, "/logout"))
                 .logoutSuccessUrl("/posts"));
         return http.build();
     }

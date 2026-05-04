@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{fragments :: head(pageTitle='글 보기')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<main class="app-main">
+    <div class="card">
+        <h1 id="title">불러오는 중…</h1>
+        <p id="meta" class="meta"></p>
+        <div id="err" class="msg-error" style="display:none;"></div>
+        <div id="body"></div>
+        <div id="gallery" class="gallery"></div>
+        <div class="actions" id="actions"></div>
+    </div>
+</main>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var POST_ID = /*[[${postId}]]*/ 0;
+document.addEventListener('DOMContentLoaded', function () {
+    board1InitNav();
+    var err = document.getElementById('err');
+    board1ApiGetJson(board1Path('/api/posts/' + POST_ID)).then(function (p) {
+        document.getElementById('title').textContent = p.title;
+        var when = p.createdAt ? String(p.createdAt).replace('T', ' ').slice(0, 19) : '';
+        document.getElementById('meta').textContent = (p.authorName || p.authorUsername) + ' · ' + when;
+        document.getElementById('body').innerHTML = '<pre style="white-space:pre-wrap;font:inherit;">' + escapeHtml(p.content) + '</pre>';
+        var g = document.getElementById('gallery');
+        if (p.images && p.images.length) {
+            g.innerHTML = p.images.map(function (im) {
+                return '<a href="' + im.url + '" target="_blank" rel="noopener"><img src="' + im.thumbnailUrl + '" alt="' + escapeAttr(im.originalName) + '"></a>';
+            }).join('');
+        }
+        var me = board1GetUsername();
+        var actions = document.getElementById('actions');
+        actions.innerHTML = '<a class="btn secondary" href="' + board1Path('/ui/posts') + '">목록</a>';
+        if (me && p.authorUsername && me === p.authorUsername) {
+            actions.innerHTML += ' <a class="btn secondary" href="' + board1Path('/ui/posts/' + POST_ID + '/edit') + '">수정</a>';
+            actions.innerHTML += ' <button type="button" class="btn danger" id="btn-del">삭제</button>';
+            document.getElementById('btn-del').addEventListener('click', function () {
+                if (!confirm('삭제할까요?')) return;
+                board1ApiDelete(board1Path('/api/posts/' + POST_ID)).then(function () {
+                    board1Redirect(board1Path('/ui/posts'));
+                }).catch(function (e) {
+                    alert(e.message || e);
+                });
+            });
+        }
+    }).catch(function (e) {
+        err.style.display = 'block';
+        err.textContent = e.message || String(e);
+        document.getElementById('title').textContent = '오류';
+    });
+});
+function escapeHtml(s) {
+    if (s == null) return '';
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+function escapeAttr(s) {
+    return escapeHtml(s).replace(/"/g, '&quot;');
+}
+/*]]>*/
+</script>
+</body>
+</html>

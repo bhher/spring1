@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<body>
+<header th:fragment="siteHeader" class="shadow-sm">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand fw-semibold" th:href="@{/}">Thymeleaf 예제</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+			        aria-controls="mainNav" aria-expanded="false" aria-label="메뉴">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">홈</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/notes}">메모(DB)</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">문법 데모</a>
+						<ul class="dropdown-menu dropdown-menu-dark">
+							<li><a class="dropdown-item" th:href="@{/demo/text}">텍스트</a></li>
+							<li><a class="dropdown-item" th:href="@{/demo/condition}">조건</a></li>
+							<li><a class="dropdown-item" th:href="@{/demo/loop}">반복</a></li>
+							<li><a class="dropdown-item" th:href="@{/demo/link}">링크</a></li>
+							<li><a class="dropdown-item" th:href="@{/demo/form}">폼</a></li>
+							<li><a class="dropdown-item" th:href="@{/demo/fragment}">프래그먼트</a></li>
+						</ul>
+					</li>
+				</ul>
+				<span class="navbar-text text-white-50 small d-none d-md-inline">Spring Boot 3 · Thymeleaf</span>
+			</div>
+		</div>
+	</nav>
+</header>
+</body>
+</html>

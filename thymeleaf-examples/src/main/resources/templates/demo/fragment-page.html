@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{layouts/fragments :: head}"></head>
+<body class="bg-light d-flex flex-column min-vh-100">
+<nav th:replace="~{layouts/fragments :: nav}"></nav>
+
+<main class="container py-4 flex-grow-1">
+	<h1 class="h4 mb-3" th:text="${pageTitle}">제목</h1>
+	<p class="text-muted small mb-4">
+		이 페이지도 <code>layouts/fragments :: nav</code> / <code>:: footer</code> 로
+		<code>layouts/header.html</code> · <code>layouts/footer.html</code> 실제 사이트 헤더·푸터를 끼워 넣습니다.
+	</p>
+
+	<section class="card mb-4 shadow-sm">
+		<div class="card-header"><code>th:replace</code></div>
+		<div class="card-body">
+			<p class="mb-3">태그 전체가 프래그먼트로 <strong>교체</strong>됩니다.</p>
+			<div class="mb-0" th:replace="~{demo/partials/messageBox :: alert(title=${boxTitle})}"></div>
+		</div>
+	</section>
+
+	<section class="card shadow-sm">
+		<div class="card-header"><code>th:insert</code></div>
+		<div class="card-body">
+			<p class="text-muted small mb-3">감싼 요소 안에 자식으로 <strong>삽입</strong>됩니다.</p>
+			<div class="border rounded p-3 bg-white">
+				<div th:insert="~{demo/partials/messageBox :: alert(title='삽입(insert) 예제')}"></div>
+			</div>
+		</div>
+	</section>
+
+	<p class="mt-4 mb-0"><a th:href="@{/}">← 홈</a></p>
+</main>
+
+<footer th:replace="~{layouts/fragments :: footer}"></footer>
+</body>
+</html>

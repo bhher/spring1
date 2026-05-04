@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{layouts/fragments :: head}">
+	<title>시작</title>
+</head>
+<body class="bg-light">
+<nav th:replace="~{layouts/fragments :: nav}"></nav>
+<main class="container py-4">
+	<h1 class="h3 mb-3">Thymeleaf 데모</h1>
+	<p class="text-muted">아래 링크는 컨트롤러가 <code>Model</code>에 넣은 값을 템플릿에서 어떻게 쓰는지 보여 줍니다.</p>
+	<ul class="list-group list-group-flush shadow-sm rounded">
+		<li class="list-group-item">
+			<a th:href="@{/h2-console}" target="_blank" rel="noopener">H2 Console</a>
+			<span class="text-muted small"> — DB 조회·SQL 실행. 로그인 시 JDBC URL 은 <code>application.properties</code> 의 <code>spring.datasource.url</code> 과 동일하게 입력</span>
+		</li>
+		<li class="list-group-item"><a th:href="@{/notes}">메모 CRUD (DB)</a></li>
+		<li class="list-group-item"><a th:href="@{/demo/text}"><code>th:text</code> / <code>th:utext</code></a></li>
+		<li class="list-group-item"><a th:href="@{/demo/condition}"><code>th:if</code> / <code>th:switch</code></a></li>
+		<li class="list-group-item"><a th:href="@{/demo/loop}"><code>th:each</code></a></li>
+		<li class="list-group-item"><a th:href="@{/demo/link}"><code>th:href</code> 와 <code>@{...}</code></a></li>
+		<li class="list-group-item"><a th:href="@{/demo/form}"><code>th:object</code> / <code>th:field</code></a></li>
+		<li class="list-group-item"><a th:href="@{/demo/fragment}"><code>th:replace</code> / <code>th:insert</code></a></li>
+	</ul>
+	<p class="mt-4 small text-muted">기본 URL: <code>http://localhost:</code> + <code>application.properties</code>의 <code>server.port</code> 값 (예: <code>http://localhost:9291</code>)</p>
+</main>
+<footer th:replace="~{layouts/fragments :: footer}"></footer>
+</body>
+</html>

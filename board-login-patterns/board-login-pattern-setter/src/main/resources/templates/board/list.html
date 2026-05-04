@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:text="|게시판 — ${@environment.getProperty('app.pattern-label')}|">게시판</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { font-size: 1.35rem; }
+        .badge { font-size: 0.75rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border-bottom: 1px solid #ddd; padding: 0.5rem 0.35rem; text-align: left; font-size: 0.95rem; }
+        th { background: #f6f6f6; }
+        a { color: #06c; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { margin-bottom: 1rem; font-size: 0.95rem; }
+        .muted { color: #666; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <a th:href="@{/}">처음</a>
+    <span th:if="${session.loginUser == null}">
+        · <a th:href="@{/login}">로그인</a>
+        · <a th:href="@{/register}">회원가입</a>
+    </span>
+    <span th:if="${session.loginUser != null}">
+        · <a th:href="@{/home}">내 홈</a>
+        · <a th:href="@{/profile}">회원정보</a>
+        · <a th:href="@{/posts/write}">글쓰기</a>
+        · <a th:href="@{/logout}">로그아웃</a>
+    </span>
+</div>
+<h1>게시판 <span class="badge" th:text="${@environment.getProperty('app.pattern-label')}">Setter</span></h1>
+<p class="muted" th:if="${posts.isEmpty()}">아직 글이 없습니다. 로그인 후 글을 작성해 보세요.</p>
+<table th:if="${!posts.isEmpty()}">
+    <thead>
+    <tr>
+        <th style="width:4rem;">번호</th>
+        <th>제목</th>
+        <th style="width:7rem;">작성자</th>
+        <th style="width:10rem;">작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${posts}">
+        <td th:text="${p.id}">1</td>
+        <td><a th:href="@{/posts/{id}(id=${p.id})}" th:text="${p.title}">제목</a></td>
+        <td th:text="${p.author.name}">이름</td>
+        <td th:text="${#temporals.format(p.createdAt, 'yyyy-MM-dd HH:mm')}">날짜</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:text="|홈 — ${@environment.getProperty('app.pattern-label')}|">홈</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 520px; margin: 3rem auto; padding: 0 1rem; }
+        h1 { font-size: 1.35rem; }
+        .badge { font-size: 0.75rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; }
+        a { color: #06c; }
+        nav { margin-top: 1.25rem; }
+    </style>
+</head>
+<body>
+<h1>환영합니다 <span class="badge" th:text="${@environment.getProperty('app.pattern-label')}">Setter</span></h1>
+<p>
+    <span th:text="${session.loginName}">이름</span>님 (<span th:text="${session.loginUser}">아이디</span>) 로그인 중입니다.
+</p>
+<nav>
+    <a th:href="@{/profile}">회원정보</a>
+    · <a th:href="@{/posts}">게시판</a>
+    · <a th:href="@{/posts/write}">글쓰기</a>
+    · <a th:href="@{/logout}">로그아웃</a>
+</nav>
+</body>
+</html>

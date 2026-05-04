@@ -11,7 +11,9 @@ public final class SecurityUtils {
 
     public static boolean isAuthenticated() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //SecurityContextHolder → 현재 로그인 사용자 정보 꺼내는 도구
         return auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken);
+        //현재  로그인정보 가져오기
     }
 
     public static String currentUsername() {

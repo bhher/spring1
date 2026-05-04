@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{layouts/fragments :: head}"></head>
+<body class="bg-light">
+<nav th:replace="~{layouts/fragments :: nav}"></nav>
+<main class="container py-4">
+	<h1 class="h4 mb-3" th:text="${pageTitle}">제목</h1>
+	<section class="card mb-3">
+		<div class="card-header"><code>th:text</code> — HTML 이스케이프(태그가 글자로 보임)</div>
+		<div class="card-body">
+			<p th:text="${withTag}">기본값</p>
+		</div>
+	</section>
+	<section class="card mb-3">
+		<div class="card-header"><code>th:utext</code> — 이스케이프 안 함(신뢰할 수 있는 HTML만 사용)</div>
+		<div class="card-body">
+			<div th:utext="${withTag}">기본값</div>
+		</div>
+	</section>
+	<section class="card">
+		<div class="card-header">인라인 <code>[[...]]</code> / <code>[(...)])</code></div>
+		<div class="card-body" th:inline="text">
+			<p>텍스트: [[${plain}]]</p>
+			<p>비이스케이프(주의): [(${withTag})]</p>
+		</div>
+	</section>
+	<p class="mt-3"><a th:href="@{/}">← 홈</a></p>
+</main>
+<footer th:replace="~{layouts/fragments :: footer}"></footer>
+</body>
+</html>

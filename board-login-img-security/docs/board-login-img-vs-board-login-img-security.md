@@ -14,13 +14,15 @@
 
 `artifactId` / 앱 이름은 `board-login-img-security`로 구분됩니다.
 
+**플랫폼 버전**: 부모 POM 기준 **Spring Boot 4.0.x** → 내장 **Spring Security 7**. 예전 Security 6 예제와 달리 `DaoAuthenticationProvider`는 **생성자에 `UserDetailsService`를 넘기는 형태**이고, 제거된 `AntPathRequestMatcher` 대신 **`PathPatternRequestMatcher.pathPattern(HttpMethod.GET, "/logout")`** 등으로 로그아웃 URL을 맞춥니다.
+
 ---
 
 ## 2. 새로 생긴 Java 코드
 
 | 경로 | 역할 |
 |------|------|
-| `config/SecurityConfig.java` | `SecurityFilterChain`: URL별 접근 제어, 폼 로그인(`/login` POST는 스프링 시큐리티가 처리), 로그아웃(GET `/logout`), `PasswordEncoder`(BCrypt), `DaoAuthenticationProvider` |
+| `config/SecurityConfig.java` | `SecurityFilterChain`: URL별 접근 제어, 폼 로그인(`/login` POST는 스프링 시큐리티가 처리), 로그아웃(GET `/logout`), `PasswordEncoder`(BCrypt), `DaoAuthenticationProvider(loginUserDetailsService)` + `PasswordEncoder` (Security 7 API) |
 | `security/LoginUserDetails.java` | `UserDetails` 구현 — 아이디·암호화된 비밀번호·표시 이름(`displayName`), `ROLE_USER` |
 | `security/LoginUserDetailsService.java` | `UserDetailsService` — DB에서 사용자 조회 후 `LoginUserDetails`로 반환 |
 | `security/SecurityUtils.java` | `SecurityContextHolder`로 로그인 여부·현재 사용자명 조회 헬퍼 |
@@ -75,12 +77,12 @@
 
 ## 7. 접근 제어 요약 (`SecurityConfig`)
 
-- **공개**: `/`, `/login`, `/register`, `POST /register`, `/uploads/**`, 게시판 **GET** (`/posts`, `/posts/{id}` 등).
+- **공개**: `/`, `/login`, `/register`, `POST /register`, **`GET /logout`**(로그아웃 링크용), `/uploads/**`, 게시판 **GET** (`/posts`, `/posts/{id}` 등).
 - **인증 필요**: `/home`, `/posts/write`, `/posts/*/edit`, **POST** `/posts/**` (등록·수정·삭제).
-- **로그아웃**: GET `/logout` → 성공 시 `/posts`로 이동 (설정 기준).
+- **로그아웃**: `logoutRequestMatcher(PathPatternRequestMatcher.pathPattern(HttpMethod.GET, "/logout"))` → 성공 시 `/posts`로 이동.
 
 ---
 
 ## 8. 한 줄 요약
 
-**board-login-img-security = board-login-img + Spring Security(폼 로그인·BCrypt·URL 권한·CSRF) − 세션 수동 로그인/인터셉터**, 패키지·DB·포트·업로드 경로는 별도 프로젝트로 겹치지 않게 조정된 버전입니다.
+**board-login-img-security = board-login-img + Spring Security 7(폼 로그인·BCrypt·URL 권한·CSRF) − 세션 수동 로그인/인터셉터**, 패키지·DB·포트·업로드 경로는 별도 프로젝트로 겹치지 않게 조정된 버전입니다. (Spring Boot 4.0.x 부모 POM 기준.)

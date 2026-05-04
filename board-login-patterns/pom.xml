@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.2</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>board-login-patterns</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>board-login-patterns</name>
+    <description>회원·게시판 CRUD — Setter / 생성자 / Builder / Mapper 비교 실습</description>
+
+    <modules>
+        <module>board-login-pattern-setter</module>
+        <module>board-login-pattern-constructor</module>
+        <module>board-login-pattern-builder</module>
+        <module>board-login-pattern-mapper</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+</project>

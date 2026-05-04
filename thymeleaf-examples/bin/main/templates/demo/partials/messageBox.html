@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<body>
+<div th:fragment="alert (title)" class="alert alert-info shadow-sm">
+	<strong>알림:</strong> <span th:text="${title}">제목</span>
+</div>
+</body>
+</html>

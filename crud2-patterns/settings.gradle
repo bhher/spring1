@@ -1,0 +1,6 @@
+rootProject.name = 'crud2-patterns'
+
+include 'crud2-pattern-setter'
+include 'crud2-pattern-constructor'
+include 'crud2-pattern-builder'
+include 'crud2-pattern-mapper'

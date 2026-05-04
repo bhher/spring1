@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{fragments :: head(pageTitle='글 목록')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<main class="app-main">
+    <div class="card">
+        <h1>글 목록</h1>
+        <p class="meta">REST: <code>/api/posts</code> — 아래 목록은 JavaScript로 불러옵니다.</p>
+        <div id="err" class="msg-error" style="display:none;"></div>
+        <ul id="list" class="post-list"></ul>
+    </div>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    board1InitNav();
+    var err = document.getElementById('err');
+    var ul = document.getElementById('list');
+    board1ApiGetJson(board1Path('/api/posts')).then(function (rows) {
+        if (!rows.length) {
+            ul.innerHTML = '<li>글이 없습니다.</li>';
+            return;
+        }
+        ul.innerHTML = rows.map(function (p) {
+            var href = board1Path('/ui/posts/' + p.id);
+            var when = p.createdAt ? String(p.createdAt).replace('T', ' ').slice(0, 19) : '';
+            return '<li><a href="' + href + '">' + escapeHtml(p.title) + '</a>' +
+                '<div class="meta">' + escapeHtml(p.authorName || p.authorUsername) + ' · ' + when + '</div></li>';
+        }).join('');
+    }).catch(function (e) {
+        err.style.display = 'block';
+        err.textContent = e.message || String(e);
+    });
+});
+function escapeHtml(s) {
+    if (s == null) return '';
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="~{fragments :: head(pageTitle='글 수정')}"></head>
+<body>
+<nav th:replace="~{fragments :: navbar}"></nav>
+<main class="app-main">
+    <div class="card">
+        <h1>글 수정</h1>
+        <div id="err" class="msg-error" style="display:none;"></div>
+        <form id="f" method="post" enctype="multipart/form-data" style="display:none;">
+            <div class="form-row">
+                <label for="title">제목</label>
+                <input id="title" name="title" type="text" required maxlength="200">
+            </div>
+            <div class="form-row">
+                <label for="content">내용</label>
+                <textarea id="content" name="content" required maxlength="10000"></textarea>
+            </div>
+            <div class="form-row">
+                <label for="files">추가 이미지</label>
+                <input id="files" name="files" type="file" accept="image/*" multiple>
+            </div>
+            <button type="submit" class="btn">저장</button>
+            <a class="btn secondary" th:href="@{/ui/posts}" style="margin-left:0.5rem;">목록</a>
+        </form>
+    </div>
+</main>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var POST_ID = /*[[${postId}]]*/ 0;
+document.addEventListener('DOMContentLoaded', function () {
+    board1InitNav();
+    var err = document.getElementById('err');
+    var form = document.getElementById('f');
+    if (!board1GetToken()) {
+        board1Redirect(board1Path('/ui/login?next=' + encodeURIComponent(board1Path('/ui/posts/' + POST_ID + '/edit'))));
+        return;
+    }
+    board1ApiGetJson(board1Path('/api/posts/' + POST_ID)).then(function (p) {
+        if (board1GetUsername() !== p.authorUsername) {
+            err.style.display = 'block';
+            err.textContent = '작성자만 수정할 수 있습니다.';
+            return;
+        }
+        document.getElementById('title').value = p.title;
+        document.getElementById('content').value = p.content;
+        form.style.display = 'block';
+    }).catch(function (e) {
+        err.style.display = 'block';
+        err.textContent = e.message || String(e);
+    });
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        err.style.display = 'none';
+        var fd = new FormData(e.target);
+        board1ApiSendForm('PUT', board1Path('/api/posts/' + POST_ID), fd).then(function () {
+            board1Redirect(board1Path('/ui/posts/' + POST_ID));
+        }).catch(function (ex) {
+            err.style.display = 'block';
+            err.textContent = ex.message || String(ex);
+        });
+    });
+});
+/*]]>*/
+</script>
+</body>
+</html>

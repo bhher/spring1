@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<body>
+<footer th:fragment="siteFooter" class="bg-dark text-white-50 border-top mt-5">
+	<div class="container py-4">
+		<div class="row row-cols-1 row-cols-md-2 gy-3">
+			<div>
+				<div class="fw-semibold text-white mb-2">thymeleaf-examples</div>
+				<p class="small mb-0">Thymeleaf 문법 데모와 H2 연동 메모 CRUD 예제입니다.</p>
+			</div>
+			<div class="text-md-end">
+				<p class="small mb-1">
+					<a class="link-light text-decoration-none" th:href="@{/h2-console}" target="_blank" rel="noopener">H2 Console</a>
+					<span class="text-white-50"> · </span>
+					<a class="link-light text-decoration-none" th:href="@{/notes}">메모 목록</a>
+				</p>
+				<p class="small mb-0" th:text="|© ${T(java.time.Year).now()} · 로컬 학습용|">©</p>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>

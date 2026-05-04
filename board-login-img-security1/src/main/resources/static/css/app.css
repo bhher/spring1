@@ -1,0 +1,147 @@
+:root {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+    line-height: 1.5;
+    color: #1a1a1a;
+    background: #f4f5f7;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+a {
+    color: #0b5fff;
+}
+
+nav.app-nav {
+    background: #fff;
+    border-bottom: 1px solid #e0e3e8;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+}
+
+nav.app-nav strong {
+    margin-right: auto;
+}
+
+main.app-main {
+    max-width: 52rem;
+    margin: 1.25rem auto;
+    padding: 0 1rem 2rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e3e8;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.card h1 {
+    margin-top: 0;
+    font-size: 1.35rem;
+}
+
+.form-row {
+    margin-bottom: 1rem;
+}
+
+.form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-row textarea {
+    min-height: 10rem;
+    font-family: inherit;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.45rem 0.9rem;
+    border-radius: 4px;
+    border: 1px solid #0b5fff;
+    background: #0b5fff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.btn.secondary {
+    background: #fff;
+    color: #0b5fff;
+}
+
+.btn.danger {
+    background: #c62828;
+    border-color: #c62828;
+}
+
+.msg-error {
+    color: #b71c1c;
+    margin-bottom: 0.75rem;
+}
+
+.msg-ok {
+    color: #2e7d32;
+    margin-bottom: 0.75rem;
+}
+
+ul.post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.post-list li {
+    border-bottom: 1px solid #eee;
+    padding: 0.65rem 0;
+}
+
+ul.post-list a {
+    font-weight: 600;
+}
+
+.meta {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.gallery a img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}

@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: shopping-mall2
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/shopping_mall2?createDatabaseIfNotExist=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: root
+    password: "1234"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 30MB
+
+server:
+  port: 8082
+
+app:
+  upload-dir: ${user.home}/shopping-mall2-uploads/

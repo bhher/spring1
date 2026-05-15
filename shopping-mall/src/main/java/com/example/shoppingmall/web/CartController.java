@@ -32,8 +32,8 @@ public class CartController {
 	@PostMapping("/items")
 	public String addItem(
 			@AuthenticationPrincipal Member member,
-			@RequestParam Long productId,
-			@RequestParam(defaultValue = "1") int quantity,
+			@RequestParam("productId") Long productId,
+			@RequestParam(name = "quantity", defaultValue = "1") int quantity,
 			RedirectAttributes ra) {
 		cartService.addItem(member, productId, quantity);
 		ra.addFlashAttribute("message", "장바구니에 담았습니다.");
@@ -43,8 +43,8 @@ public class CartController {
 	@PostMapping("/items/{itemId}/quantity")
 	public String updateQuantity(
 			@AuthenticationPrincipal Member member,
-			@PathVariable Long itemId,
-			@RequestParam int quantity) {
+			@PathVariable("itemId") Long itemId,
+			@RequestParam("quantity") int quantity) {
 		cartService.updateQuantity(member, itemId, quantity);
 		return "redirect:/cart";
 	}
@@ -52,7 +52,7 @@ public class CartController {
 	@PostMapping("/items/{itemId}/remove")
 	public String remove(
 			@AuthenticationPrincipal Member member,
-			@PathVariable Long itemId,
+			@PathVariable("itemId") Long itemId,
 			RedirectAttributes ra) {
 		cartService.removeItem(member, itemId);
 		ra.addFlashAttribute("message", "삭제했습니다.");

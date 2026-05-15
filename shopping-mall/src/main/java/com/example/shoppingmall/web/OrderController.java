@@ -31,7 +31,7 @@ public class OrderController {
 	@PostMapping("/{id}/cancel")
 	public String cancel(
 			@AuthenticationPrincipal Member member,
-			@PathVariable Long id,
+			@PathVariable("id") Long id,
 			RedirectAttributes ra) {
 		orderService.cancelOrder(id, member);
 		ra.addFlashAttribute("message", "주문이 취소되었습니다.");

@@ -23,7 +23,7 @@ public class ProductController {
 
 	@GetMapping("/products")
 	public String list(
-			@RequestParam(required = false) String keyword,
+			@RequestParam(name = "keyword", required = false) String keyword,
 			@PageableDefault(size = 12, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
 			Model model) {
 		model.addAttribute("page", productService.findProducts(keyword, pageable));
@@ -32,7 +32,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/products/{id}")
-	public String detail(@PathVariable Long id, Model model) {
+	public String detail(@PathVariable("id") Long id, Model model) {
 		ProductDetailDto dto = productService.findDetail(id);
 		model.addAttribute("product", dto);
 		return "products/detail";

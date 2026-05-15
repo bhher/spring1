@@ -47,6 +47,16 @@ public class Member implements UserDetails {
 	@Column(nullable = false, length = 50)
 	private String name;
 
+	/** 배송지 등 (DB NOT NULL 대응, 미입력 시 빈 문자열) */
+	@Column(nullable = false, length = 255)
+	@Builder.Default
+	private String address = "";
+
+	/** 연락처 (DB NOT NULL 대응) */
+	@Column(nullable = false, length = 30)
+	@Builder.Default
+	private String phone = "";
+
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
 	private Role role;

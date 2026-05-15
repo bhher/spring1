@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.shoppingmall.ShoppingMallApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-13T03:07:51.428Z" hostname="DESKTOP-QCRJUG5" time="24.118">
+<testsuite name="com.example.shoppingmall.ShoppingMallApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-05-15T00:12:56.760Z" hostname="DESKTOP-QCRJUG5" time="14.482">
   <properties/>
-  <testcase name="contextLoads()" classname="com.example.shoppingmall.ShoppingMallApplicationTests" time="0.833"/>
-  <system-out><![CDATA[12:07:51.858 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.shoppingmall.ShoppingMallApplicationTests]: ShoppingMallApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-12:07:52.536 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.shoppingmall.ShoppingMallApplication for test class com.example.shoppingmall.ShoppingMallApplicationTests
+  <testcase name="contextLoads()" classname="com.example.shoppingmall.ShoppingMallApplicationTests" time="0.564"/>
+  <system-out><![CDATA[09:12:57.075 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.shoppingmall.ShoppingMallApplicationTests]: ShoppingMallApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:12:57.555 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.shoppingmall.ShoppingMallApplication for test class com.example.shoppingmall.ShoppingMallApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,19 +14,19 @@
 
  :: Spring Boot ::                (v3.5.6)
 
-2026-04-13T12:07:54.462+09:00  INFO 75456 --- [shopping-mall] [    Test worker] c.e.s.ShoppingMallApplicationTests       : Starting ShoppingMallApplicationTests using Java 17.0.17 with PID 75456 (started by TJ in D:\spring1\shopping-mall)
-2026-04-13T12:07:54.464+09:00  INFO 75456 --- [shopping-mall] [    Test worker] c.e.s.ShoppingMallApplicationTests       : The following 1 profile is active: "test"
-2026-04-13T12:07:57.791+09:00  INFO 75456 --- [shopping-mall] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-13T12:07:57.999+09:00  INFO 75456 --- [shopping-mall] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 182 ms. Found 5 JPA repository interfaces.
-2026-04-13T12:07:59.982+09:00  INFO 75456 --- [shopping-mall] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-13T12:08:00.249+09:00  INFO 75456 --- [shopping-mall] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2026-04-13T12:08:00.366+09:00  INFO 75456 --- [shopping-mall] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-04-13T12:08:01.180+09:00  INFO 75456 --- [shopping-mall] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-13T12:08:01.314+09:00  INFO 75456 --- [shopping-mall] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-04-13T12:08:01.733+09:00  INFO 75456 --- [shopping-mall] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shoppingmall user=SA
-2026-04-13T12:08:01.739+09:00  INFO 75456 --- [shopping-mall] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-04-13T12:08:01.808+09:00  WARN 75456 --- [shopping-mall] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-04-13T12:08:01.909+09:00  INFO 75456 --- [shopping-mall] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-05-15T09:12:58.760+09:00  INFO 9956 --- [shopping-mall] [    Test worker] c.e.s.ShoppingMallApplicationTests       : Starting ShoppingMallApplicationTests using Java 17.0.17 with PID 9956 (started by TJ in D:\spring1\shopping-mall)
+2026-05-15T09:12:58.762+09:00  INFO 9956 --- [shopping-mall] [    Test worker] c.e.s.ShoppingMallApplicationTests       : The following 1 profile is active: "test"
+2026-05-15T09:13:01.604+09:00  INFO 9956 --- [shopping-mall] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-15T09:13:01.783+09:00  INFO 9956 --- [shopping-mall] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 150 ms. Found 5 JPA repository interfaces.
+2026-05-15T09:13:03.406+09:00  INFO 9956 --- [shopping-mall] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-15T09:13:03.585+09:00  INFO 9956 --- [shopping-mall] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-15T09:13:03.822+09:00  INFO 9956 --- [shopping-mall] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-15T09:13:04.465+09:00  INFO 9956 --- [shopping-mall] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-15T09:13:04.524+09:00  INFO 9956 --- [shopping-mall] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-15T09:13:04.986+09:00  INFO 9956 --- [shopping-mall] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shoppingmall user=SA
+2026-05-15T09:13:05.006+09:00  INFO 9956 --- [shopping-mall] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-15T09:13:05.078+09:00  WARN 9956 --- [shopping-mall] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-15T09:13:05.112+09:00  INFO 9956 --- [shopping-mall] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -34,7 +34,7 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-13T12:08:04.382+09:00  INFO 75456 --- [shopping-mall] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-15T09:13:06.629+09:00  INFO 9956 --- [shopping-mall] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: 
     drop table if exists cart_items cascade 
 Hibernate: 
@@ -68,8 +68,10 @@ Hibernate:
     create table members (
         created_at timestamp(6) not null,
         id bigint generated by default as identity,
+        phone varchar(30) not null,
         name varchar(50) not null,
         email varchar(120) not null unique,
+        address varchar(255) not null,
         password varchar(255) not null,
         role enum ('ADMIN','USER') not null,
         primary key (id)
@@ -148,11 +150,11 @@ Hibernate:
        add constraint FKklteexl4d40hrqpcfyg19diev 
        foreign key (member_id) 
        references members
-2026-04-13T12:08:04.696+09:00  INFO 75456 --- [shopping-mall] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-13T12:08:06.947+09:00  INFO 75456 --- [shopping-mall] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-04-13T12:08:10.416+09:00  INFO 75456 --- [shopping-mall] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2026-04-13T12:08:11.693+09:00  INFO 75456 --- [shopping-mall] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2026-04-13T12:08:14.561+09:00  INFO 75456 --- [shopping-mall] [    Test worker] c.e.s.ShoppingMallApplicationTests       : Started ShoppingMallApplicationTests in 21.589 seconds (process running for 24.656)
+2026-05-15T09:13:06.741+09:00  INFO 9956 --- [shopping-mall] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-15T09:13:07.761+09:00  INFO 9956 --- [shopping-mall] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-15T09:13:09.326+09:00  INFO 9956 --- [shopping-mall] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2026-05-15T09:13:09.723+09:00  INFO 9956 --- [shopping-mall] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-05-15T09:13:10.653+09:00  INFO 9956 --- [shopping-mall] [    Test worker] c.e.s.ShoppingMallApplicationTests       : Started ShoppingMallApplicationTests in 12.566 seconds (process running for 15.213)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

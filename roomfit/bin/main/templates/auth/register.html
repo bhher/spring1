@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('회원가입')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container col-md-6">
+	<h2 class="mb-4">회원가입</h2>
+	<form th:action="@{/register}" th:object="${form}" method="post" class="card card-body shadow-sm">
+		<div class="mb-3">
+			<label class="form-label">아이디</label>
+			<input th:field="*{loginId}" class="form-control"/>
+			<div class="text-danger small" th:errors="*{loginId}"></div>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">비밀번호</label>
+			<input type="password" th:field="*{password}" class="form-control"/>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">비밀번호 확인</label>
+			<input type="password" th:field="*{passwordConfirm}" class="form-control"/>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">이름</label>
+			<input th:field="*{name}" class="form-control"/>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">닉네임</label>
+			<input th:field="*{nickname}" class="form-control"/>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">이메일</label>
+			<input th:field="*{email}" class="form-control"/>
+		</div>
+		<button type="submit" class="btn btn-primary w-100">가입</button>
+	</form>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

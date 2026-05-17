@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head(${post.title})}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container">
+	<h2 th:text="${post.title}"></h2>
+	<p class="text-muted" th:text="${post.author.nickname} + ' · 조회 ' + ${post.viewCount}"></p>
+	<div th:utext="${#strings.replace(post.content, T(java.lang.System).lineSeparator(), '&lt;br/&gt;')}"></div>
+	<form th:action="@{/community/report}" method="post" class="mt-4" sec:authorize="isAuthenticated()">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<input type="hidden" name="targetType" value="COMMUNITY_POST"/>
+		<input type="hidden" name="targetId" th:value="${post.id}"/>
+		<input name="reason" class="form-control mb-2" placeholder="신고 사유" required/>
+		<button class="btn btn-outline-danger btn-sm">신고</button>
+	</form>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

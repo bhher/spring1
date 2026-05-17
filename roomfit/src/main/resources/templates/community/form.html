@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('글쓰기')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container col-md-8">
+	<h2 th:text="${board.label} + ' 글쓰기'"></h2>
+	<form th:action="@{/community/write}" method="post" class="card card-body">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<input type="hidden" name="board" th:value="${board}"/>
+		<input name="title" class="form-control mb-2" placeholder="제목" required/>
+		<textarea name="content" class="form-control mb-2" rows="8" required></textarea>
+		<button class="btn btn-primary">등록</button>
+	</form>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('아이디 찾기')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container col-md-5">
+	<h2>아이디 찾기</h2>
+	<form method="post" class="card card-body mt-3">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<input name="name" class="form-control mb-2" placeholder="이름" required/>
+		<input name="email" type="email" class="form-control mb-2" placeholder="이메일" required/>
+		<button class="btn btn-primary">찾기</button>
+	</form>
+	<div class="alert alert-info mt-3" th:if="${foundLoginId}">
+		회원 아이디: <strong th:text="${foundLoginId}"></strong>
+	</div>
+	<div class="alert alert-danger mt-3" th:if="${error}" th:text="${error}"></div>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

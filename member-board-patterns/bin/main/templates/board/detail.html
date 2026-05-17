@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+	<meta charset="UTF-8"/>
+	<title th:text="${board.title}">상세</title>
+	<style>
+		body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; }
+		pre { white-space: pre-wrap; background: #f7f7f7; padding: 1rem; }
+		.meta { color: #555; font-size: 0.9rem; }
+		.actions { margin-top: 1rem; }
+		.error { color: #c00; }
+		.flash { color: #060; }
+	</style>
+</head>
+<body>
+<p class="flash" th:if="${message}" th:text="${message}"></p>
+<p class="error" th:if="${error}" th:text="${error}"></p>
+<h1 th:text="${board.title}">제목</h1>
+<p class="meta">
+	<span th:text="${board.authorNickname}">작성자</span>
+	· <span th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm')}">작성</span>
+	<th:block th:if="${board.updatedAt != board.createdAt}">
+		· 수정: <span th:text="${#temporals.format(board.updatedAt, 'yyyy-MM-dd HH:mm')}"></span>
+	</th:block>
+</p>
+<pre th:text="${board.content}">내용</pre>
+<p><a th:href="@{/boards}">목록</a></p>
+<div class="actions" th:if="${session.loginUserId != null and session.loginUserId == board.authorId}">
+	<a th:href="@{/boards/{id}/edit(id=${board.id})}">수정</a>
+	<form style="display:inline" th:action="@{/boards/{id}/delete(id=${board.id})}" method="post"
+	      onsubmit="return confirm('삭제할까요?');">
+		<button type="submit">삭제</button>
+	</form>
+</div>
+</body>
+</html>

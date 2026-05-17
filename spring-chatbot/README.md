@@ -2,6 +2,11 @@
 
 Spring Boot에서 OpenAI(ChatGPT) API를 호출하는 **최소 동작 예제**입니다.
 
+## 문서
+
+- [OpenAI 연동 가이드 (준비물~Responses·다음 편 로드맵)](docs/OpenAI-연동-가이드.md)
+- [소스 구조 설명 (파일별 묶음)](docs/설명.md)
+
 ## 1) 준비물
 
 - Java 17+

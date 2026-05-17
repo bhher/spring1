@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('맞춤 추천')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container">
+	<h2 class="mb-4">맞춤 인테리어 추천</h2>
+	<div class="row mb-4">
+		<div class="col-md-6">
+			<div class="card h-100">
+				<div class="card-header">추천 색상 조합</div>
+				<div class="card-body">
+					<span th:each="color : ${result.colorPalette}" class="color-swatch"
+					      th:style="'background-color:' + ${color}" th:title="${color}"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card h-100">
+				<div class="card-header">가구 배치 조언</div>
+				<div class="card-body">
+					<pre class="mb-0" style="white-space:pre-wrap;font-family:inherit" th:text="${result.layoutAdvice}"></pre>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h4>추천 게시글 <small class="text-muted">(프로필·유사사용자·인기글 병합)</small></h4>
+	<div class="row mb-4">
+		<div class="col-md-4 mb-3" th:each="item : ${result.posts}">
+			<div class="card h-100">
+				<div class="card-body">
+					<span class="badge bg-success" th:text="'점수 ' + ${item.score()}">0</span>
+					<h6 th:text="${item.post.title}">제목</h6>
+					<a th:href="@{/interior/{id}(id=${item.post.id})}">보기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h4>추천 소품</h4>
+	<div class="row">
+		<div class="col-md-3 mb-3" th:each="p : ${products}">
+			<div class="card h-100">
+				<img th:src="${p.imagePath}" class="card-img-top" alt=""/>
+				<div class="card-body">
+					<h6 th:text="${p.name}"></h6>
+					<p th:text="${#numbers.formatInteger(p.price, 0, 'COMMA')} + '원'"></p>
+					<a th:href="@{/shop/{id}(id=${p.id})}" class="btn btn-sm btn-outline-primary">상세</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

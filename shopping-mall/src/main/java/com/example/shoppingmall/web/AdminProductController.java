@@ -32,7 +32,7 @@ public class AdminProductController {
 
 	@GetMapping
 	public String list(
-			@RequestParam(required = false) String keyword,
+			@RequestParam(name = "keyword", required = false) String keyword,
 			@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
 			Model model) {
 		model.addAttribute("page", productService.findProducts(keyword, pageable));
@@ -64,7 +64,7 @@ public class AdminProductController {
 	}
 
 	@GetMapping("/{id}/edit")
-	public String editForm(@PathVariable Long id, Model model) {
+	public String editForm(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("form", productService.getProductForm(id));
 		model.addAttribute("product", productService.findDetail(id));
 		model.addAttribute("editMode", true);
@@ -73,7 +73,7 @@ public class AdminProductController {
 
 	@PostMapping("/{id}")
 	public String update(
-			@PathVariable Long id,
+			@PathVariable("id") Long id,
 			@Valid @ModelAttribute("form") ProductFormDto form,
 			BindingResult bindingResult,
 			@RequestParam(value = "images", required = false) List<MultipartFile> images,
@@ -90,7 +90,7 @@ public class AdminProductController {
 	}
 
 	@PostMapping("/{id}/delete")
-	public String delete(@PathVariable Long id, RedirectAttributes ra) {
+	public String delete(@PathVariable("id") Long id, RedirectAttributes ra) {
 		productService.deleteProduct(id);
 		ra.addFlashAttribute("message", "상품을 삭제했습니다.");
 		return "redirect:/admin/products";

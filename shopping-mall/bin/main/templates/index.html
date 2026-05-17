@@ -34,6 +34,19 @@
 			</div>
 		</div>
 	</div>
+	<div class="row g-3" sec:authorize="hasRole('ADMIN')">
+		<div class="col-12">
+			<div class="card shadow-sm bg-light">
+				<div class="card-body">
+					<h5 class="card-title">관리자 메뉴</h5>
+					<p class="card-text text-muted small mb-3">
+						상품 등록·수정·삭제는 아래에서 진행합니다. 상단 네비의 「관리자」 링크와 동일합니다.
+					</p>
+					<a class="btn btn-primary" th:href="@{/admin/products}">상품 관리로 이동</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

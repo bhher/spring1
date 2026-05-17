@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.6'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'io.freefair.lombok' version '8.11'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	implementation 'net.coobird:thumbnailator:0.4.19'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'com.h2database:h2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.register('copyReactOverlay', Copy) {
+	group = 'frontend'
+	onlyIf { file("${projectDir}/frontend/dist/index.html").exists() }
+	from "${projectDir}/frontend/dist"
+	into layout.buildDirectory.dir('resources/main/static')
+	mustRunAfter(tasks.named('processResources'))
+}
+
+tasks.named('classes') {
+	dependsOn('copyReactOverlay')
+}

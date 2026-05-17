@@ -39,3 +39,11 @@ out/
 ### Node (React) ###
 frontend/node_modules/
 frontend/dist/
+frontend1/node_modules/
+frontend1/dist/
+frontend2/node_modules/
+frontend2/dist/
+frontend3/node_modules/
+frontend3/dist/
+frontend4/node_modules/
+frontend4/dist/

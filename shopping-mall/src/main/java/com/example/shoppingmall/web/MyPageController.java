@@ -30,7 +30,7 @@ public class MyPageController {
 	@GetMapping("/orders/{id}")
 	public String orderDetail(
 			@AuthenticationPrincipal Member member,
-			@PathVariable Long id,
+			@PathVariable("id") Long id,
 			Model model) {
 		OrderDetailDto dto = orderService.findOrderDetail(id, member);
 		model.addAttribute("order", dto);

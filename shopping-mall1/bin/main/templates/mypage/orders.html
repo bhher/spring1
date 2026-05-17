@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('내 주문')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<main class="container">
+	<h2 class="mb-3">내 주문</h2>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>주문번호</th>
+			<th>금액</th>
+			<th>상태</th>
+			<th>주문일시</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="o : ${orders}">
+			<td th:text="${o.orderNumber}">ORD</td>
+			<td th:text="${#numbers.formatDecimal(o.totalAmount, 0, 'COMMA', 0, 'POINT')} + '원'">0</td>
+			<td>
+				<span class="badge bg-secondary" th:if="${o.status.name() == 'ORDERED'}">주문완료</span>
+				<span class="badge bg-dark" th:if="${o.status.name() == 'CANCELLED'}">취소</span>
+			</td>
+			<td th:text="${#temporals.format(o.orderedAt, 'yyyy-MM-dd HH:mm')}">-</td>
+			<td><a class="btn btn-sm btn-outline-primary" th:href="@{/mypage/orders/{id}(id=${o.id})}">상세</a></td>
+		</tr>
+		</tbody>
+	</table>
+	<p th:if="${#lists.isEmpty(orders)}" class="text-muted">주문 내역이 없습니다.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -5,6 +5,9 @@
 <div th:replace="~{fragments/layout :: navbar}"></div>
 <div class="container">
 	<h2 class="mb-4">관리자 대시보드</h2>
+	<p class="mb-3">
+		<a class="btn btn-primary" th:href="@{/admin/products}">소품 상품 관리</a>
+	</p>
 	<div class="row mb-4">
 		<div class="col-md-3"><div class="card text-center p-3"><h3 th:text="${stats.memberCount}">0</h3><p>회원</p></div></div>
 		<div class="col-md-3"><div class="card text-center p-3"><h3 th:text="${stats.interiorPostCount}">0</h3><p>인테리어 글</p></div></div>

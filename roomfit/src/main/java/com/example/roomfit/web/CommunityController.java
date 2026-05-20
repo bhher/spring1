@@ -25,8 +25,8 @@ public class CommunityController {
 
 	@GetMapping
 	public String list(
-			@RequestParam(defaultValue = "FREE") CommunityBoardType board,
-			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(name = "board", defaultValue = "FREE") CommunityBoardType board,
+			@RequestParam(name = "page", defaultValue = "0") int page,
 			Model model) {
 		model.addAttribute("board", board);
 		model.addAttribute("boards", CommunityBoardType.values());
@@ -34,14 +34,8 @@ public class CommunityController {
 		return "community/list";
 	}
 
-	@GetMapping("/{id}")
-	public String detail(@PathVariable Long id, Model model) {
-		model.addAttribute("post", communityService.getDetail(id));
-		return "community/detail";
-	}
-
 	@GetMapping("/write")
-	public String writeForm(@RequestParam CommunityBoardType board, Model model) {
+	public String writeForm(@RequestParam("board") CommunityBoardType board, Model model) {
 		model.addAttribute("board", board);
 		return "community/form";
 	}
@@ -49,19 +43,25 @@ public class CommunityController {
 	@PostMapping("/write")
 	public String write(
 			@AuthenticationPrincipal Member member,
-			@RequestParam CommunityBoardType board,
-			@RequestParam String title,
-			@RequestParam String content) {
+			@RequestParam("board") CommunityBoardType board,
+			@RequestParam("title") String title,
+			@RequestParam("content") String content) {
 		Long id = communityService.create(member.getId(), board, title, content);
 		return "redirect:/community/" + id;
+	}
+
+	@GetMapping("/{id:\\d+}")
+	public String detail(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("post", communityService.getDetail(id));
+		return "community/detail";
 	}
 
 	@PostMapping("/report")
 	public String report(
 			@AuthenticationPrincipal Member member,
-			@RequestParam String targetType,
-			@RequestParam Long targetId,
-			@RequestParam String reason) {
+			@RequestParam("targetType") String targetType,
+			@RequestParam("targetId") Long targetId,
+			@RequestParam("reason") String reason) {
 		reportService.report(member.getId(), targetType, targetId, reason);
 		return "redirect:/community";
 	}

@@ -6,7 +6,7 @@
 <div class="container">
 	<h2 th:text="${post.title}"></h2>
 	<p class="text-muted" th:text="${post.author.nickname} + ' · 조회 ' + ${post.viewCount}"></p>
-	<div th:utext="${#strings.replace(post.content, T(java.lang.System).lineSeparator(), '&lt;br/&gt;')}"></div>
+	<div class="mb-0" style="white-space:pre-wrap" th:text="${post.content}"></div>
 	<form th:action="@{/community/report}" method="post" class="mt-4" sec:authorize="isAuthenticated()">
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 		<input type="hidden" name="targetType" value="COMMUNITY_POST"/>

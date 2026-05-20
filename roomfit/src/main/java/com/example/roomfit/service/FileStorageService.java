@@ -17,6 +17,7 @@ public class FileStorageService {
 	public FileStorageService(@Value("${app.upload-dir}") String uploadDir) throws IOException {
 		this.root = Paths.get(uploadDir);
 		Files.createDirectories(root.resolve("interior"));
+		Files.createDirectories(root.resolve("product"));
 	}
 
 	public String storeInteriorImage(MultipartFile file) throws IOException {
@@ -28,6 +29,17 @@ public class FileStorageService {
 		Path target = root.resolve("interior").resolve(filename);
 		Files.copy(file.getInputStream(), target);
 		return "/uploads/interior/" + filename;
+	}
+
+	public String storeProductImage(MultipartFile file) throws IOException {
+		if (file == null || file.isEmpty()) {
+			return null;
+		}
+		String ext = getExtension(file.getOriginalFilename());
+		String filename = UUID.randomUUID() + ext;
+		Path target = root.resolve("product").resolve(filename);
+		Files.copy(file.getInputStream(), target);
+		return "/uploads/product/" + filename;
 	}
 
 	private String getExtension(String name) {

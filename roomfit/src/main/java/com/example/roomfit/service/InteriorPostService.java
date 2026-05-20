@@ -40,12 +40,53 @@ public class InteriorPostService {
 		return interiorPostRepository.findByStatusAndStyle(PostStatus.VISIBLE, style, pageable);
 	}
 
+	/** 목록·메인 화면용: images 를 트랜잭션 안에서 미리 로드합니다 (open-in-view=false). */
+	@Transactional(readOnly = true)
+	public Page<InteriorPost> listForView(InteriorStyle style, Pageable pageable) {
+		Page<InteriorPost> page = list(style, pageable);
+		page.getContent().forEach(InteriorPost::getThumbnailPath);
+		return page;
+	}
+
+	@Transactional(readOnly = true)
+	public java.util.List<InteriorPost> listRecentForView(int limit) {
+		java.util.List<InteriorPost> posts = interiorPostRepository
+				.findTop50ByStatusOrderByCreatedAtDesc(PostStatus.VISIBLE);
+		posts.forEach(InteriorPost::getThumbnailPath);
+		return posts.stream().limit(limit).toList();
+	}
+
+	@Transactional(readOnly = true)
+	public java.util.List<InteriorPost> listPopularForView(int limit) {
+		java.util.List<InteriorPost> posts = interiorPostRepository
+				.findTop20ByStatusOrderByLikeCountDescViewCountDescCreatedAtDesc(
+						PostStatus.VISIBLE, org.springframework.data.domain.PageRequest.of(0, limit));
+		posts.forEach(InteriorPost::getThumbnailPath);
+		return posts;
+	}
+
+	/**
+	 * 상세 화면용: 조회수 증가·댓글·좋아요 여부를 한 트랜잭션에서 처리합니다.
+	 * (open-in-view=false 환경에서 Thymeleaf 렌더 전에 연관 데이터를 로드)
+	 */
 	@Transactional
-	public InteriorPost getDetail(Long id, Long memberId) {
+	public InteriorPostDetailView loadDetailPage(Long id, Long memberId) {
 		InteriorPost post = interiorPostRepository.findByIdAndStatus(id, PostStatus.VISIBLE)
 				.orElseThrow(() -> new ResourceNotFoundException("게시글을 찾을 수 없습니다."));
 		post.increaseViewCount();
-		return post;
+		post.getAuthor().getNickname();
+		post.getThumbnailPath();
+		List<com.example.roomfit.domain.Comment> comments =
+				commentRepository.findByPostTypeAndPostIdAndStatusOrderByCreatedAtAsc(
+						PostType.INTERIOR, id, PostStatus.VISIBLE);
+		boolean liked = isLiked(id, memberId);
+		return new InteriorPostDetailView(post, comments, liked);
+	}
+
+	public record InteriorPostDetailView(
+			InteriorPost post,
+			List<com.example.roomfit.domain.Comment> comments,
+			boolean liked) {
 	}
 
 	@Transactional

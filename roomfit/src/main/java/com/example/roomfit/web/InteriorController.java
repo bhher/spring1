@@ -29,11 +29,11 @@ public class InteriorController {
 
 	@GetMapping
 	public String list(
-			@RequestParam(required = false) InteriorStyle style,
-			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(name = "style", required = false) InteriorStyle style,
+			@RequestParam(name = "page", defaultValue = "0") int page,
 			Model model) {
 		var pageable = PageRequest.of(page, 12);
-		model.addAttribute("page", interiorPostService.list(style, pageable));
+		model.addAttribute("page", interiorPostService.listForView(style, pageable));
 		model.addAttribute("style", style);
 		model.addAttribute("styles", InteriorStyle.values());
 		return "interior/list";
@@ -41,14 +41,14 @@ public class InteriorController {
 
 	@GetMapping("/{id}")
 	public String detail(
-			@PathVariable Long id,
+			@PathVariable("id") Long id,
 			@AuthenticationPrincipal Member member,
 			Model model) {
 		Long memberId = member != null ? member.getId() : null;
-		var post = interiorPostService.getDetail(id, memberId);
-		model.addAttribute("post", post);
-		model.addAttribute("comments", interiorPostService.getComments(id));
-		model.addAttribute("liked", interiorPostService.isLiked(id, memberId));
+		var view = interiorPostService.loadDetailPage(id, memberId);
+		model.addAttribute("post", view.post());
+		model.addAttribute("comments", view.comments());
+		model.addAttribute("liked", view.liked());
 		return "interior/detail";
 	}
 
@@ -64,7 +64,7 @@ public class InteriorController {
 			@AuthenticationPrincipal Member member,
 			@Valid @ModelAttribute("form") InteriorPostFormDto form,
 			BindingResult bindingResult,
-			@RequestParam(required = false) MultipartFile image,
+			@RequestParam(name = "image", required = false) MultipartFile image,
 			Model model) throws Exception {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("styles", InteriorStyle.values());
@@ -75,24 +75,24 @@ public class InteriorController {
 	}
 
 	@PostMapping("/{id}/like")
-	public String like(@PathVariable Long id, @AuthenticationPrincipal Member member) {
+	public String like(@PathVariable("id") Long id, @AuthenticationPrincipal Member member) {
 		interiorPostService.toggleLike(id, member.getId());
 		return "redirect:/interior/" + id;
 	}
 
 	@PostMapping("/{id}/comment")
 	public String comment(
-			@PathVariable Long id,
+			@PathVariable("id") Long id,
 			@AuthenticationPrincipal Member member,
-			@RequestParam String content,
-			@RequestParam(required = false) Long parentId) {
+			@RequestParam("content") String content,
+			@RequestParam(name = "parentId", required = false) Long parentId) {
 		interiorPostService.addComment(id, member.getId(), content, parentId);
 		return "redirect:/interior/" + id;
 	}
 
 	@PostMapping("/{id}/delete")
 	public String delete(
-			@PathVariable Long id,
+			@PathVariable("id") Long id,
 			@AuthenticationPrincipal Member member,
 			RedirectAttributes ra) {
 		interiorPostService.delete(id, member.getId());

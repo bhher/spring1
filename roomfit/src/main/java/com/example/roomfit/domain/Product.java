@@ -56,4 +56,12 @@ public class Product {
 
 	@Builder.Default
 	private boolean onSale = true;
+
+	/** 목록·상세용 이미지 URL (없으면 placeholder) */
+	public String getDisplayImagePath() {
+		if (imagePath != null && !imagePath.isBlank()) {
+			return imagePath;
+		}
+		return "https://via.placeholder.com/400x300?text=No+Image";
+	}
 }

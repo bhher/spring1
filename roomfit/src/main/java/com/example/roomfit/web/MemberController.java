@@ -32,7 +32,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/find-id")
-	public String findId(@RequestParam String name, @RequestParam String email, Model model) {
+	public String findId(@RequestParam("name") String name, @RequestParam("email") String email, Model model) {
 		try {
 			model.addAttribute("foundLoginId", memberService.findLoginId(name, email));
 		} catch (Exception e) {
@@ -48,9 +48,9 @@ public class MemberController {
 
 	@PostMapping("/find-pw")
 	public String findPw(
-			@RequestParam String loginId,
-			@RequestParam String email,
-			@RequestParam String newPassword,
+			@RequestParam("loginId") String loginId,
+			@RequestParam("email") String email,
+			@RequestParam("newPassword") String newPassword,
 			RedirectAttributes ra) {
 		try {
 			memberService.resetPassword(loginId, email, newPassword);
@@ -78,9 +78,9 @@ public class MemberController {
 	@PostMapping("/edit")
 	public String edit(
 			@AuthenticationPrincipal Member member,
-			@RequestParam String nickname,
-			@RequestParam(required = false) String phone,
-			@RequestParam(required = false) Gender gender,
+			@RequestParam("nickname") String nickname,
+			@RequestParam(name = "phone", required = false) String phone,
+			@RequestParam(name = "gender", required = false) Gender gender,
 			RedirectAttributes ra) {
 		memberService.updateMember(member.getId(), nickname, phone, gender);
 		ra.addFlashAttribute("message", "회원정보가 수정되었습니다.");

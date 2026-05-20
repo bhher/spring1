@@ -26,7 +26,7 @@ public class ShopController {
 	}
 
 	@GetMapping("/{id}")
-	public String detail(@PathVariable Long id, @AuthenticationPrincipal Member member, Model model) {
+	public String detail(@PathVariable("id") Long id, @AuthenticationPrincipal Member member, Model model) {
 		model.addAttribute("product", shopService.getProduct(id));
 		model.addAttribute("reviews", shopService.getReviews(id));
 		if (member != null) {
@@ -36,7 +36,7 @@ public class ShopController {
 	}
 
 	@PostMapping("/{id}/cart")
-	public String addCart(@PathVariable Long id, @AuthenticationPrincipal Member member) {
+	public String addCart(@PathVariable("id") Long id, @AuthenticationPrincipal Member member) {
 		shopService.addToCart(member.getId(), id, 1);
 		return "redirect:/shop/cart";
 	}
@@ -48,17 +48,17 @@ public class ShopController {
 	}
 
 	@PostMapping("/{id}/wish")
-	public String wish(@PathVariable Long id, @AuthenticationPrincipal Member member) {
+	public String wish(@PathVariable("id") Long id, @AuthenticationPrincipal Member member) {
 		shopService.toggleWishlist(member.getId(), id);
 		return "redirect:/shop/" + id;
 	}
 
 	@PostMapping("/{id}/review")
 	public String review(
-			@PathVariable Long id,
+			@PathVariable("id") Long id,
 			@AuthenticationPrincipal Member member,
-			@RequestParam int rating,
-			@RequestParam String content) {
+			@RequestParam("rating") int rating,
+			@RequestParam("content") String content) {
 		shopService.addReview(member.getId(), id, rating, content);
 		return "redirect:/shop/" + id;
 	}

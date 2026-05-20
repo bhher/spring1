@@ -18,7 +18,7 @@
 	<div class="row">
 		<div class="col-md-4 mb-3" th:each="post : ${page.content}">
 			<div class="card card-interior h-100">
-				<img th:src="${post.thumbnailPath}" class="card-img-top" alt=""/>
+				<img th:src="${post.thumbnailPath}" class="card-img-top" alt="" th:alt="${post.title}"/>
 				<div class="card-body">
 					<span class="badge bg-secondary" th:text="${post.style.label}"></span>
 					<h5 th:text="${post.title}">제목</h5>

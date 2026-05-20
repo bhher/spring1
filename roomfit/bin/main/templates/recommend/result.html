@@ -40,7 +40,7 @@
 	<div class="row">
 		<div class="col-md-3 mb-3" th:each="p : ${products}">
 			<div class="card h-100">
-				<img th:src="${p.imagePath}" class="card-img-top" alt=""/>
+				<img th:src="${p.displayImagePath}" class="card-img-top" alt=""/>
 				<div class="card-body">
 					<h6 th:text="${p.name}"></h6>
 					<p th:text="${#numbers.formatInteger(p.price, 0, 'COMMA')} + '원'"></p>

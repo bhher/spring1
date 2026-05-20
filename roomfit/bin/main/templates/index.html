@@ -15,7 +15,7 @@
 	<div class="row mb-5">
 		<div class="col-md-4 mb-3" th:each="post : ${popular}">
 			<div class="card card-interior h-100 shadow-sm">
-				<img th:src="${post.thumbnailPath}" class="card-img-top" alt=""/>
+				<img th:src="${post.thumbnailPath}" class="card-img-top" alt="" th:alt="${post.title}"/>
 				<div class="card-body">
 					<span class="badge bg-secondary" th:text="${post.style.label}">스타일</span>
 					<h5 class="card-title mt-2" th:text="${post.title}">제목</h5>

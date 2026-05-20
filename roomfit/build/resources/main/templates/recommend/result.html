@@ -25,12 +25,29 @@
 		</div>
 	</div>
 	<h4>추천 게시글 <small class="text-muted">(프로필·유사사용자·인기글 병합)</small></h4>
+	<div class="alert alert-light border small mb-3">
+		<strong>프로필 매칭 (최대 100점)</strong>
+		스타일 35(유사 15) · 평수 25 · 예산 20 · 가구 10 · 생활패턴 5 · 참여도 5 · 신선도 5<br/>
+		<strong>유사 사용자</strong> Σ(코사인유사도 × 2) × 10 &nbsp;|&nbsp;
+		<strong>인기글</strong> (조회×0.1 + 좋아요×2 + 댓글×1.5) × 시간감쇠
+	</div>
 	<div class="row mb-4">
 		<div class="col-md-4 mb-3" th:each="item : ${result.posts}">
 			<div class="card h-100">
 				<div class="card-body">
-					<span class="badge bg-success" th:text="'점수 ' + ${item.score()}">0</span>
+					<div class="mb-2">
+						<span class="badge bg-success me-1" th:text="'총점 ' + ${item.score}">0</span>
+						<span class="badge bg-secondary" th:text="${item.source.label}">출처</span>
+					</div>
 					<h6 th:text="${item.post.title}">제목</h6>
+					<ul class="list-unstyled small text-muted mb-2" th:if="${item.breakdown != null}">
+						<li th:each="entry : ${item.breakdown.components}">
+							<span th:text="${entry.key}">항목</span>:
+							<strong th:text="${entry.value} + '점'">0점</strong>
+						</li>
+					</ul>
+					<p class="small text-muted mb-2" th:if="${item.breakdown != null}"
+					   th:text="${item.breakdown.formula}">산식</p>
 					<a th:href="@{/interior/{id}(id=${item.post.id})}">보기</a>
 				</div>
 			</div>
@@ -40,7 +57,7 @@
 	<div class="row">
 		<div class="col-md-3 mb-3" th:each="p : ${products}">
 			<div class="card h-100">
-				<img th:src="${p.imagePath}" class="card-img-top" alt=""/>
+				<img th:src="${p.displayImagePath}" class="card-img-top" alt=""/>
 				<div class="card-body">
 					<h6 th:text="${p.name}"></h6>
 					<p th:text="${#numbers.formatInteger(p.price, 0, 'COMMA')} + '원'"></p>

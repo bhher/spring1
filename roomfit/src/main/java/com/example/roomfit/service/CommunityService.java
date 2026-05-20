@@ -25,8 +25,7 @@ public class CommunityService {
 
 	@Transactional
 	public CommunityPost getDetail(Long id) {
-		CommunityPost post = communityPostRepository.findById(id)
-				.filter(p -> p.getStatus() == PostStatus.VISIBLE)
+		CommunityPost post = communityPostRepository.findByIdAndStatus(id, PostStatus.VISIBLE)
 				.orElseThrow(() -> new ResourceNotFoundException("게시글을 찾을 수 없습니다."));
 		post.setViewCount(post.getViewCount() + 1);
 		return post;

@@ -93,12 +93,21 @@ public class InteriorPost {
 	/** 목록/메인용 썸네일 (images 가 @EntityGraph 로 로드된 뒤 사용) */
 	public String getThumbnailPath() {
 		if (images == null || images.isEmpty()) {
-			return "https://via.placeholder.com/400x200";
+			return "/images/no-image.svg";
 		}
-		return images.stream()
+		String path = images.stream()
 				.filter(PostImage::isThumbnail)
 				.map(PostImage::getFilePath)
+				.filter(p -> p != null && !p.isBlank())
 				.findFirst()
-				.orElse(images.get(0).getFilePath());
+				.orElseGet(() -> images.stream()
+						.map(PostImage::getFilePath)
+						.filter(p -> p != null && !p.isBlank())
+						.findFirst()
+						.orElse(null));
+		if (path == null) {
+			return "/images/no-image.svg";
+		}
+		return path;
 	}
 }

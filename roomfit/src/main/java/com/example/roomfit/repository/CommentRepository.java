@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-	@EntityGraph(attributePaths = "author")
+	@EntityGraph(attributePaths = {"author", "parent"})
 	List<Comment> findByPostTypeAndPostIdAndStatusOrderByCreatedAtAsc(
 			PostType postType, Long postId, PostStatus status);
 

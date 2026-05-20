@@ -29,9 +29,9 @@ public class AdminController {
 
 	@PostMapping("/reports/{id}")
 	public String processReport(
-			@PathVariable Long id,
-			@RequestParam ReportStatus status,
-			@RequestParam(required = false) String adminNote) {
+			@PathVariable("id") Long id,
+			@RequestParam("status") ReportStatus status,
+			@RequestParam(name = "adminNote", required = false) String adminNote) {
 		reportService.process(id, status, adminNote);
 		return "redirect:/admin";
 	}

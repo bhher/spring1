@@ -1,0 +1,31 @@
+:root {
+	--rf-primary: #5c7a6b;
+	--rf-accent: #d4c4b0;
+	--rf-bg: #f8f6f3;
+}
+
+body {
+	background-color: var(--rf-bg);
+}
+
+.hero-roomfit {
+	background: linear-gradient(135deg, #5c7a6b 0%, #3d5248 100%);
+	color: #fff;
+	border-radius: 1rem;
+	padding: 3rem 2rem;
+}
+
+.card-interior img {
+	height: 200px;
+	object-fit: cover;
+}
+
+.color-swatch {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	display: inline-block;
+	margin-right: 0.5rem;
+}

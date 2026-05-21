@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('커뮤니티')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container">
+	<h2>커뮤니티</h2>
+	<div class="mb-3">
+		<a th:each="b : ${boards}" th:href="@{/community(board=${b})}"
+		   class="btn btn-sm me-1"
+		   th:classappend="${board == b} ? 'btn-primary' : 'btn-outline-secondary'"
+		   th:text="${b.label}"></a>
+		<a th:href="@{/community/write(board=${board})}" class="btn btn-sm btn-success float-end" sec:authorize="isAuthenticated()">글쓰기</a>
+	</div>
+	<table class="table table-hover">
+		<tr th:each="p : ${page.content}">
+			<td><a th:href="@{/community/{id}(id=${p.id})}" th:text="${p.title}">제목</a></td>
+			<td th:text="${p.author.nickname}"></td>
+			<td th:text="${p.viewCount}"></td>
+		</tr>
+	</table>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

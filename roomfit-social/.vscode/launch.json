@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "RoomFit Social (Spring Boot)",
+      "request": "launch",
+      "mainClass": "com.example.roomfit.RoomFitApplication",
+      "projectName": "roomfit-social"
+    }
+  ]
+}

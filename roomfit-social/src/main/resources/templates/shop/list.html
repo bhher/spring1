@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('소품샵')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container">
+	<h2 class="mb-4">인테리어 소품</h2>
+	<div class="row">
+		<div class="col-md-3 mb-3" th:each="p : ${products}">
+			<div class="card h-100">
+				<img th:src="${p.displayImagePath}" class="card-img-top" alt=""/>
+				<div class="card-body">
+					<span class="badge bg-secondary" th:text="${p.styleTag.label}"></span>
+					<h6 th:text="${p.name}"></h6>
+					<p th:text="${#numbers.formatInteger(p.price, 0, 'COMMA')} + '원'"></p>
+					<p class="small">★ <span th:text="${p.avgRating}"></span></p>
+					<a th:href="@{/shop/{id}(id=${p.id})}" class="btn btn-sm btn-primary">보기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

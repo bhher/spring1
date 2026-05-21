@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('RoomFit - 원룸 인테리어')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container">
+	<div class="hero-roomfit mb-5">
+		<h1 class="display-5 fw-bold">1인 가구를 위한 원룸 인테리어 All-in-One</h1>
+		<p class="lead mb-3">취향·평수·예산에 맞는 맞춤 추천과 커뮤니티, 소품 쇼핑까지.</p>
+		<a class="btn btn-light btn-lg me-2" th:href="@{/interior}">인테리어 둘러보기</a>
+		<a class="btn btn-outline-light btn-lg" th:href="@{/member/profile}" sec:authorize="isAuthenticated()">맞춤 추천 받기</a>
+		<a class="btn btn-outline-light btn-lg" th:href="@{/login}" sec:authorize="!isAuthenticated()">로그인 후 추천</a>
+	</div>
+	<h3 class="mb-3">인기 인테리어</h3>
+	<div class="row mb-5">
+		<div class="col-md-4 mb-3" th:each="post : ${popular}">
+			<div class="card card-interior h-100 shadow-sm">
+				<img th:src="${post.thumbnailPath}" class="card-img-top" alt="" th:alt="${post.title}"/>
+				<div class="card-body">
+					<span class="badge bg-secondary" th:text="${post.style.label}">스타일</span>
+					<h5 class="card-title mt-2" th:text="${post.title}">제목</h5>
+					<a th:href="@{/interior/{id}(id=${post.id})}" class="btn btn-sm btn-primary">보기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h3 class="mb-3">최신 글</h3>
+	<div class="row">
+		<div class="col-md-4 mb-3" th:each="post : ${latest}">
+			<div class="card h-100">
+				<div class="card-body">
+					<h6 th:text="${post.title}">제목</h6>
+					<a th:href="@{/interior/{id}(id=${post.id})}">상세보기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

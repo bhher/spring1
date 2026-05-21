@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:boardloginimgsectest;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test
+            client-secret: test
+
+app:
+  upload-dir: ${java.io.tmpdir}/board-login-img-security-oauth-test-uploads/

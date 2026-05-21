@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('장바구니')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container">
+	<h2>장바구니</h2>
+	<table class="table" th:if="${!cart.items.isEmpty()}">
+		<tr th:each="item : ${cart.items}">
+			<td th:text="${item.product.name}"></td>
+			<td th:text="${item.quantity}"></td>
+			<td th:text="${#numbers.formatInteger(item.product.price * item.quantity, 0, 'COMMA')} + '원'"></td>
+		</tr>
+	</table>
+	<p th:if="${cart.items.isEmpty()}" class="text-muted">장바구니가 비어 있습니다.</p>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>

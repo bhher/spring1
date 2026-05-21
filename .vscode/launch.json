@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "RoomFitApplication",
+      "request": "launch",
+      "mainClass": "com.example.roomfit.RoomFitApplication",
+      "projectName": ""
+    },
+    {
+      "type": "java",
       "name": "HospitalReservationApplication",
       "request": "launch",
       "mainClass": "com.example.hospital.HospitalReservationApplication",

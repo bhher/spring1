@@ -3,6 +3,10 @@
     {
       "name": "roomfit",
       "path": "roomfit"
+    },
+    {
+      "name": "roomfit-social",
+      "path": "roomfit-social"
     }
   ],
   "extensions": {

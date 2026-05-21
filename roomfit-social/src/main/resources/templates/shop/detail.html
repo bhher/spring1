@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head(${product.name})}"></head>
+<body>
+<div th:replace="~{fragments/layout :: navbar}"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<img th:src="${product.displayImagePath}" class="img-fluid rounded" alt=""/>
+		</div>
+		<div class="col-md-7">
+			<h2 th:text="${product.name}"></h2>
+			<p class="fs-4" th:text="${#numbers.formatInteger(product.price, 0, 'COMMA')} + '원'"></p>
+			<p>평점 ★ <span th:text="${product.avgRating}"></span> (<span th:text="${product.reviewCount}"></span>)</p>
+			<form th:action="@{/shop/{id}/cart(id=${product.id})}" method="post" class="d-inline" sec:authorize="isAuthenticated()">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<button class="btn btn-primary">장바구니</button>
+			</form>
+			<form th:action="@{/shop/{id}/wish(id=${product.id})}" method="post" class="d-inline" sec:authorize="isAuthenticated()">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<button class="btn btn-outline-danger" th:text="${wished} ? '찜 해제' : '찜'">찜</button>
+			</form>
+		</div>
+	</div>
+	<hr/>
+	<h4>리뷰</h4>
+	<ul class="list-group mb-3">
+		<li class="list-group-item" th:each="r : ${reviews}">
+			★<span th:text="${r.rating}"></span> · <span th:text="${r.member.nickname}"></span>
+			<p th:text="${r.content}"></p>
+		</li>
+	</ul>
+	<form th:action="@{/shop/{id}/review(id=${product.id})}" method="post" sec:authorize="isAuthenticated()">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<select name="rating" class="form-select mb-2">
+			<option th:each="i : ${#numbers.sequence(5,1,-1)}" th:value="${i}" th:text="${i} + '점'"></option>
+		</select>
+		<textarea name="content" class="form-control mb-2" required></textarea>
+		<button class="btn btn-sm btn-primary">리뷰 작성</button>
+	</form>
+</div>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>
